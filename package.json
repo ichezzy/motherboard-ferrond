@@ -1,0 +1,16 @@
+{
+  "name": "motherboard-ferrond",
+  "private": true,
+  "description": "Foundry VTT module Motherboard: Ferrond (White Signal, Daggerheart). Build tools and tests.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "icons": "node tools/icons.mjs",
+    "packs": "node tools/build-packs.mjs"
+  },
+  "devDependencies": {
+    "@foundryvtt/foundryvtt-cli": "3.0.5",
+    "fflate": "0.8.2",
+    "sharp": "0.33.5"
+  }
+}

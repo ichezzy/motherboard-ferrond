@@ -1,0 +1,27 @@
+/* ============================================================
+   Motherboard: Ferrond
+   ============================================================ */
+
+/* ---------- Currency icons (Daggerheart renders them as <i class="…">) ---------- */
+
+.mbf-currency {
+  display: inline-block;
+  width: 1.2em;
+  height: 1.2em;
+  background: center / contain no-repeat;
+  vertical-align: -0.25em;
+  font-style: normal;
+}
+.mbf-currency::before {
+  content: none;
+}
+.mbf-currency-bits { background-image: url("../assets/icons/currency/bits.webp"); }
+.mbf-currency-bytes { background-image: url("../assets/icons/currency/bytes.webp"); }
+.mbf-currency-chunks { background-image: url("../assets/icons/currency/chunks.webp"); }
+
+/* The homebrew settings show the icon on a button. */
+button.icon.mbf-currency {
+  width: 1.8em;
+  height: 1.8em;
+  background-size: 70%;
+}

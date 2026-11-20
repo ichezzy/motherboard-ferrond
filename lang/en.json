@@ -1,0 +1,13 @@
+{
+  "MBF": {
+    "Settings": {
+      "Currency": {
+        "Name": "Bits, Bytes and Chunks",
+        "Hint": "Use Ferrond's money on the character sheets: Bits, Bytes and Chunks (8 Bits = 1 Byte, 8 Bytes = 1 Chunk). Switches off the Quantum currency of dh-ikonis. Turn this off to keep another currency."
+      }
+    },
+    "Currency": {
+      "IkonisOff": "Motherboard: Ferrond switched off \"Enable Quantum Currency\" in dh-ikonis, so the sheets keep Bits, Bytes and Chunks."
+    }
+  }
+}
