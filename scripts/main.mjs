@@ -4,6 +4,7 @@ import { registerScrapCategory } from "./scrap.mjs";
 import { registerLootTableSetting } from "./settings.mjs";
 import { registerReleaseQueries, renderReleaseCard } from "./release.mjs";
 import { openScrapReward } from "./reward-dialog.mjs";
+import { registerSellQueries, addSellOption } from "./sell.mjs";
 
 Hooks.once("init", () => {
   registerCurrencySetting();
@@ -11,6 +12,7 @@ Hooks.once("init", () => {
   registerLootTableSetting();
   registerScrapCategory();
   registerReleaseQueries();
+  registerSellQueries();
 
   // For macros: game.modules.get("motherboard-ferrond").api.openScrapReward()
   game.modules.get(MODULE_ID).api = { openScrapReward };
@@ -37,3 +39,6 @@ Hooks.on("getSceneControlButtons", controls => {
 });
 
 Hooks.on("renderChatMessageHTML", (message, html) => renderReleaseCard(message, html));
+
+// "Sell" in the item menu (⋮) of scrap on the character sheet.
+Hooks.on("getCharacterSheetContextOptions", addSellOption);

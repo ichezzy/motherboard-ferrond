@@ -63,6 +63,27 @@
       "NotYours": "You can only take scrap for your own character.",
       "BadResult": "The dice results do not fit this release."
     },
+    "Sell": {
+      "Menu": "Sell",
+      "Title": "Sell {name}",
+      "Each": "{name}: {price} each.",
+      "Quantity": "How many",
+      "NeedsGM": "Scrap is sold in town. The GM has to approve the sale.",
+      "Ask": "Ask the GM",
+      "Sell": "Sell",
+      "Waiting": "Asked the GM. Waiting for an answer …",
+      "Done": "Sold {quantity} × {name} for {price}.",
+      "Denied": "The GM did not approve the sale.",
+      "RequestTitle": "Sell scrap?",
+      "Request": "{user} wants to sell {quantity} × {name} from {actor} for {price}.",
+      "Approve": "Approve",
+      "Deny": "Deny",
+      "Chat": "{actor} sold {quantity} × {name} for {price}.",
+      "NoItem": "This scrap item no longer exists.",
+      "NotYours": "You can only sell scrap of your own character.",
+      "BadQuantity": "Choose a number from 1 to {max}.",
+      "Changed": "The inventory changed in the meantime. Please try again."
+    },
     "GM": {
       "Offline": "The GM has to be online for this.",
       "Busy": "This is already being handled.",
