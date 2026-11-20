@@ -21,15 +21,18 @@ const ALIASES = { aluminium: "aluminum" };
 const CURRENCY = ["bits", "bytes", "chunks"];
 const SCRAP_KEYS = new Set(SCRAP_ITEMS.map(i => i.key));
 
+const CLEAR = { r: 0, g: 0, b: 0, alpha: 0 };
+
 async function convert(input, output, size) {
-  const trimmed = await sharp(input).ensureAlpha().trim({ threshold: 8 }).toBuffer({ resolveWithObject: true });
-  const { width, height } = trimmed.info;
-  const side = Math.ceil(Math.max(width, height) * 1.06);
-  const left = Math.floor((side - width) / 2);
-  const top = Math.floor((side - height) / 2);
-  await sharp(trimmed.data)
-    .extend({ left, right: side - width - left, top, bottom: side - height - top, background: { r: 0, g: 0, b: 0, alpha: 0 } })
-    .resize(size, size)
+  const trimmed = await sharp(input).ensureAlpha().trim({ threshold: 8 }).png().toBuffer();
+  // Fit the trimmed picture into the inner square (keeps its proportions), then add an even margin.
+  // sharp always resizes before it extends, so the margin is in final pixels.
+  const inner = Math.round(size / 1.06);
+  const margin = size - inner;
+  const a = Math.floor(margin / 2);
+  await sharp(trimmed)
+    .resize(inner, inner, { fit: "contain", background: CLEAR })
+    .extend({ left: a, right: margin - a, top: a, bottom: margin - a, background: CLEAR })
     .webp({ quality: 88, alphaQuality: 100 })
     .toFile(output);
 }
