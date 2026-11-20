@@ -20,6 +20,28 @@
     ]
   },
   "esmodules": ["scripts/main.mjs"],
+  "packs": [
+    {
+      "name": "items",
+      "label": "Ferrond Items",
+      "path": "packs/items",
+      "type": "Item",
+      "system": "daggerheart",
+      "ownership": { "PLAYER": "NONE", "TRUSTED": "NONE", "ASSISTANT": "OWNER" },
+      "flags": {}
+    },
+    {
+      "name": "tables",
+      "label": "Ferrond Tables",
+      "path": "packs/tables",
+      "type": "RollTable",
+      "ownership": { "PLAYER": "NONE", "TRUSTED": "NONE", "ASSISTANT": "OWNER" },
+      "flags": {}
+    }
+  ],
+  "packFolders": [
+    { "name": "Motherboard", "sorting": "m", "color": null, "packs": ["items", "tables"], "folders": [] }
+  ],
   "styles": ["styles/ferrond.css"],
   "languages": [
     { "lang": "en", "name": "English", "path": "lang/en.json" },

@@ -8,6 +8,13 @@
     },
     "Currency": {
       "IkonisOff": "Motherboard: Ferrond switched off \"Enable Quantum Currency\" in dh-ikonis, so the sheets keep Bits, Bytes and Chunks."
+    },
+    "Scrap": {
+      "Category": "Scrap",
+      "SheetGroup": "Loot",
+      "Kind": "Kind",
+      "Value": "Value",
+      "ValueHint": "Worth of one piece: Shards in Bits, Metals in Bytes, Components in Chunks."
     }
   }
 }
