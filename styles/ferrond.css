@@ -89,3 +89,23 @@ button.icon.mbf-currency {
 .mbf-card .mbf-result-worth { font-weight: 600; min-width: 5.5em; text-align: right; }
 .mbf-card li.mbf-claimed { opacity: 0.95; }
 .mbf-card .mbf-card-foot { font-size: 0.8em; opacity: 0.7; text-align: right; }
+
+/* ---------- Loot table editor (module settings) ---------- */
+
+.mbf-loot-table table.mbf-table { width: 100%; margin: 0; border-collapse: collapse; }
+.mbf-loot-table .mbf-table th, .mbf-loot-table .mbf-table td {
+  border: 1px solid var(--color-border, #7a7971);
+  padding: 4px;
+  text-align: center;
+}
+.mbf-loot-table .mbf-table th.mbf-row-label { text-align: left; white-space: nowrap; }
+.mbf-loot-table .mbf-dc { font-weight: normal; font-size: 0.8em; opacity: 0.75; }
+.mbf-loot-table .mbf-cell { display: flex; justify-content: center; gap: 3px; }
+.mbf-loot-table .mbf-cell input { width: 2.6em; text-align: center; }
+.mbf-loot-table input.mbf-dice-shard { border-color: #c9772f; }
+.mbf-loot-table input.mbf-dice-metal { border-color: #9aa3b2; }
+.mbf-loot-table input.mbf-dice-component { border-color: #2fb3a6; }
+.mbf-loot-table .mbf-legend { display: flex; gap: 1rem; justify-content: center; font-size: 0.85em; margin: 0.3rem 0 0; }
+.mbf-loot-table .mbf-legend-0 { color: #c9772f; }
+.mbf-loot-table .mbf-legend-1 { color: #9aa3b2; }
+.mbf-loot-table .mbf-legend-2 { color: #2fb3a6; }

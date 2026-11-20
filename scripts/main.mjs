@@ -5,11 +5,13 @@ import { registerLootTableSetting } from "./settings.mjs";
 import { registerReleaseQueries, renderReleaseCard } from "./release.mjs";
 import { openScrapReward } from "./reward-dialog.mjs";
 import { registerSellQueries, addSellOption } from "./sell.mjs";
+import { registerLootTableMenu } from "./table-editor.mjs";
 
 Hooks.once("init", () => {
   registerCurrencySetting();
   registerCurrencyGuard();
   registerLootTableSetting();
+  registerLootTableMenu();
   registerScrapCategory();
   registerReleaseQueries();
   registerSellQueries();

@@ -63,6 +63,16 @@
       "NotYours": "You can only take scrap for your own character.",
       "BadResult": "The dice results do not fit this release."
     },
+    "Table": {
+      "Title": "Loot Table",
+      "MenuName": "Loot table",
+      "MenuLabel": "Edit loot table",
+      "MenuHint": "How many Shards, Metals and Components each player rolls, by remnants and difficulty.",
+      "Intro": "Dice for EACH player. Rows: how many remnants (machines) were among the enemies or are in the place being searched. Columns: how hard the fight was, or the Difficulty of a search. Each cell: Shards · Metals · Components.",
+      "Reset": "Back to default",
+      "Save": "Save",
+      "Saved": "Loot table saved."
+    },
     "Sell": {
       "Menu": "Sell",
       "Title": "Sell {name}",
