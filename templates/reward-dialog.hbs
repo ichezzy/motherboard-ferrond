@@ -1,0 +1,68 @@
+<div class="mbf-reward-body standard-form">
+  <div class="form-group">
+    <label>{{localize "MBF.Reward.Source"}}</label>
+    <div class="form-fields mbf-source">
+      <label><input type="radio" name="source" value="fight" checked> {{localize "MBF.Reward.Fight"}}</label>
+      <label><input type="radio" name="source" value="search"> {{localize "MBF.Reward.Search"}}</label>
+    </div>
+  </div>
+
+  <div class="form-group" data-mbf-show="fight">
+    <label>{{localize "MBF.Reward.Difficulty"}}</label>
+    <div class="form-fields">
+      <select name="difficulty">{{selectOptions difficulties selected=difficulty localize=true}}</select>
+    </div>
+  </div>
+
+  <div class="form-group mbf-hidden" data-mbf-show="search">
+    <label>{{localize "MBF.Reward.DC"}}</label>
+    <div class="form-fields">
+      <input type="number" name="dc" value="{{dc}}" min="1" max="40" step="1">
+      <span class="mbf-dc-column"></span>
+    </div>
+    <p class="hint">{{dcHint}}</p>
+  </div>
+
+  <div class="form-group">
+    <label>{{localize "MBF.Reward.Remnants"}}</label>
+    <div class="form-fields">
+      <select name="remnants">{{selectOptions remnantOptions selected=remnants localize=true}}</select>
+    </div>
+    <p class="hint">{{localize "MBF.Reward.RemnantsHint"}}</p>
+  </div>
+
+  <div class="mbf-reward-actors-wrap">
+    <table class="mbf-reward-actors">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="mbf-col-name">{{localize "MBF.Reward.Character"}}</th>
+          <th data-tooltip="Shards (d6)">Shards</th>
+          <th data-tooltip="Metals (d8)">Metals</th>
+          <th data-tooltip="Components (d10)">Comp.</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each actors}}
+        <tr data-mbf-row>
+          <td>
+            <input type="checkbox" name="actors.{{@index}}.selected" {{checked checked}}>
+            <input type="hidden" name="actors.{{@index}}.uuid" value="{{uuid}}">
+          </td>
+          <td class="mbf-col-name"><img src="{{img}}" alt=""> {{name}}</td>
+          <td><input type="number" name="actors.{{@index}}.shard" value="{{dice.shard}}" min="0" max="{{@root.maxDice}}" step="1" data-kind="shard"></td>
+          <td><input type="number" name="actors.{{@index}}.metal" value="{{dice.metal}}" min="0" max="{{@root.maxDice}}" step="1" data-kind="metal"></td>
+          <td><input type="number" name="actors.{{@index}}.component" value="{{dice.component}}" min="0" max="{{@root.maxDice}}" step="1" data-kind="component"></td>
+        </tr>
+        {{else}}
+        <tr><td colspan="5" class="mbf-empty">{{localize "MBF.Reward.NoCharacters"}}</td></tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <p class="hint">{{localize "MBF.Reward.DiceHint"}}</p>
+</div>
+
+<footer class="form-footer">
+  <button type="submit"><i class="fa-solid fa-gears"></i> {{localize "MBF.Reward.Release"}}</button>
+</footer>

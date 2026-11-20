@@ -25,3 +25,67 @@ button.icon.mbf-currency {
   height: 1.8em;
   background-size: 70%;
 }
+
+.mbf-hidden { display: none !important; }
+
+/* ---------- Scrap Reward dialog (GM) ---------- */
+
+.mbf-reward .mbf-reward-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.mbf-reward .mbf-source { gap: 1rem; }
+.mbf-reward .mbf-source label { display: flex; align-items: center; gap: 0.3rem; }
+.mbf-reward .mbf-dc-column { flex: 0 0 auto; min-width: 7em; opacity: 0.8; }
+.mbf-reward .mbf-reward-actors-wrap { max-height: 320px; overflow-y: auto; }
+.mbf-reward table.mbf-reward-actors { width: 100%; margin: 0; border-collapse: collapse; }
+.mbf-reward .mbf-reward-actors th { text-align: center; font-weight: 600; }
+.mbf-reward .mbf-reward-actors th.mbf-col-name { text-align: left; }
+.mbf-reward .mbf-reward-actors td { text-align: center; padding: 2px 4px; }
+.mbf-reward .mbf-reward-actors td.mbf-col-name { text-align: left; white-space: nowrap; }
+.mbf-reward .mbf-reward-actors td.mbf-col-name img {
+  width: 28px; height: 28px; object-fit: cover; vertical-align: middle; border: none; border-radius: 4px; margin-right: 4px;
+}
+.mbf-reward .mbf-reward-actors input[type="number"] { width: 3.5em; text-align: center; }
+.mbf-reward .mbf-empty { padding: 0.5rem; font-style: italic; }
+
+/* ---------- Scrap card in the chat ---------- */
+
+.mbf-card { display: flex; flex-direction: column; gap: 0.4rem; }
+.mbf-card-head { display: flex; align-items: center; gap: 0.5rem; }
+.mbf-card-head img { width: 36px; height: 36px; border: none; flex: 0 0 auto; }
+.mbf-card-head div { display: flex; flex-direction: column; line-height: 1.2; }
+.mbf-card-head span { font-size: 0.85em; opacity: 0.8; }
+.mbf-card ol.mbf-entries { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+.mbf-card li.mbf-entry {
+  border: 1px solid var(--color-border, #7a7971);
+  border-radius: 6px;
+  padding: 0.35rem 0.45rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.mbf-card .mbf-entry-head { display: flex; align-items: center; gap: 0.4rem; }
+.mbf-card .mbf-entry-head img { width: 26px; height: 26px; object-fit: cover; border: none; border-radius: 4px; flex: 0 0 auto; }
+.mbf-card .mbf-entry-name { font-weight: 600; flex: 1 1 auto; }
+.mbf-card .mbf-entry-dice { font-size: 0.8em; opacity: 0.8; text-align: right; }
+.mbf-card .mbf-slots { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.mbf-card .mbf-slot {
+  display: flex; flex-direction: column; align-items: center;
+  font-size: 0.75em; gap: 1px;
+}
+.mbf-card .mbf-slot input { width: 2.6em; height: 1.8em; text-align: center; font-size: 1.2em; }
+.mbf-card .mbf-slot-shard span { color: #c9772f; }
+.mbf-card .mbf-slot-metal span { color: #9aa3b2; }
+.mbf-card .mbf-slot-component span { color: #2fb3a6; }
+.mbf-card .mbf-hint, .mbf-card .mbf-waiting { margin: 0; font-size: 0.8em; opacity: 0.8; }
+.mbf-card button.mbf-claim { margin: 0; }
+.mbf-card ul.mbf-results { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.mbf-card ul.mbf-results li { display: flex; align-items: center; gap: 0.35rem; }
+.mbf-card ul.mbf-results img { width: 24px; height: 24px; border: none; flex: 0 0 auto; }
+.mbf-card .mbf-result-name { flex: 1 1 auto; }
+.mbf-card .mbf-result-roll { font-size: 0.8em; opacity: 0.75; }
+.mbf-card .mbf-result-worth { font-weight: 600; min-width: 5.5em; text-align: right; }
+.mbf-card li.mbf-claimed { opacity: 0.95; }
+.mbf-card .mbf-card-foot { font-size: 0.8em; opacity: 0.7; text-align: right; }

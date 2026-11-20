@@ -15,6 +15,58 @@
       "Kind": "Kind",
       "Value": "Value",
       "ValueHint": "Worth of one piece: Shards in Bits, Metals in Bytes, Components in Chunks."
+    },
+    "Difficulty": {
+      "easy": "Easy",
+      "standard": "Standard",
+      "difficult": "Difficult",
+      "veryDifficult": "Very Difficult"
+    },
+    "Remnants": {
+      "none": "No remnants",
+      "some": "Some remnants",
+      "many": "Many remnants"
+    },
+    "Reward": {
+      "Title": "Scrap Reward",
+      "Source": "Loot from",
+      "Fight": "Fight",
+      "Search": "Search (no fight)",
+      "Difficulty": "Fight",
+      "DC": "Difficulty",
+      "DCHint": "DC {easy} Easy · {standard} Standard · {difficult} Difficult · {veryDifficult} Very Difficult. The column is picked from the DC.",
+      "Remnants": "Remnants",
+      "RemnantsHint": "How many machines were among the enemies – or are lying around in the place being searched. Gutters and Syfters count as no remnants.",
+      "Character": "Character",
+      "DiceHint": "Dice per character, from the loot table. Change any number for this release only.",
+      "NoCharacters": "No player characters in this world.",
+      "Release": "Release",
+      "NobodySelected": "Tick at least one character.",
+      "LabelFight": "{difficulty} fight · {remnants}",
+      "LabelSearch": "Search, DC {dc} · {remnants}"
+    },
+    "Card": {
+      "Speaker": "Scrap",
+      "Title": "Scrap released",
+      "Nothing": "Nothing to roll",
+      "Hint": "Rolled at the table? Type your results. Empty fields are rolled here.",
+      "Take": "Take scrap",
+      "Waiting": "Not rolled yet.",
+      "Typed": "Typed in (rolled at the table)",
+      "BadInput": "Enter a number from 1 to {die}, or leave the field empty.",
+      "Progress": "{done} of {total} rolled"
+    },
+    "Claim": {
+      "NoRelease": "This scrap release no longer exists.",
+      "Already": "This scrap has already been taken.",
+      "NoActor": "The character no longer exists.",
+      "NotYours": "You can only take scrap for your own character.",
+      "BadResult": "The dice results do not fit this release."
+    },
+    "GM": {
+      "Offline": "The GM has to be online for this.",
+      "Busy": "This is already being handled.",
+      "OnlyGM": "Only the GM can do this."
     }
   }
 }
