@@ -4,7 +4,9 @@
   "description": "House rules for the Ferrond setting (White Signal, Daggerheart): Bits, Bytes and Chunks as currency, scrap loot the GM releases and the players roll, selling scrap with GM approval, and a compendium of Ferrond items.",
   "version": "0.1.0",
   "authors": [
-    { "name": "Chezzy" }
+    {
+      "name": "Chezzy"
+    }
   ],
   "url": "https://github.com/ichezzy/motherboard-ferrond",
   "manifest": "https://github.com/ichezzy/motherboard-ferrond/releases/latest/download/module.json",
@@ -16,10 +18,18 @@
   },
   "relationships": {
     "systems": [
-      { "id": "daggerheart", "type": "system", "compatibility": { "minimum": "2.12.9" } }
+      {
+        "id": "daggerheart",
+        "type": "system",
+        "compatibility": {
+          "minimum": "2.12.9"
+        }
+      }
     ]
   },
-  "esmodules": ["scripts/main.mjs"],
+  "esmodules": [
+    "scripts/main.mjs"
+  ],
   "packs": [
     {
       "name": "items",
@@ -27,7 +37,11 @@
       "path": "packs/items",
       "type": "Item",
       "system": "daggerheart",
-      "ownership": { "PLAYER": "NONE", "TRUSTED": "NONE", "ASSISTANT": "OWNER" },
+      "ownership": {
+        "PLAYER": "NONE",
+        "TRUSTED": "NONE",
+        "ASSISTANT": "OWNER"
+      },
       "flags": {}
     },
     {
@@ -35,16 +49,39 @@
       "label": "Ferrond Tables",
       "path": "packs/tables",
       "type": "RollTable",
-      "ownership": { "PLAYER": "NONE", "TRUSTED": "NONE", "ASSISTANT": "OWNER" },
+      "ownership": {
+        "PLAYER": "NONE",
+        "TRUSTED": "NONE",
+        "ASSISTANT": "OWNER"
+      },
       "flags": {}
     }
   ],
   "packFolders": [
-    { "name": "Motherboard", "sorting": "m", "color": null, "packs": ["items", "tables"], "folders": [] }
+    {
+      "name": "Motherboard",
+      "sorting": "m",
+      "color": null,
+      "packs": [
+        "items",
+        "tables"
+      ],
+      "folders": []
+    }
   ],
-  "styles": ["styles/ferrond.css"],
+  "styles": [
+    "styles/ferrond.css"
+  ],
   "languages": [
-    { "lang": "en", "name": "English", "path": "lang/en.json" },
-    { "lang": "de", "name": "Deutsch", "path": "lang/en.json" }
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/en.json"
+    }
   ]
 }
