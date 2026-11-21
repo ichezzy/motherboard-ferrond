@@ -33,8 +33,10 @@ export class ScrapRewardDialog extends HandlebarsApplicationMixin(ApplicationV2)
     form: { handler: ScrapRewardDialog.#onSubmit, closeOnSubmit: true }
   };
 
+  // Foundry 14: every part must render exactly one root element, so the footer is its own part.
   static PARTS = {
-    form: { template: `modules/${MODULE_ID}/templates/reward-dialog.hbs`, scrollable: [".mbf-reward-actors-wrap"] }
+    form: { template: `modules/${MODULE_ID}/templates/reward-dialog.hbs`, scrollable: [".mbf-reward-actors-wrap"] },
+    footer: { template: "templates/generic/form-footer.hbs" }
   };
 
   async _prepareContext() {
@@ -49,7 +51,8 @@ export class ScrapRewardDialog extends HandlebarsApplicationMixin(ApplicationV2)
       difficulties: Object.fromEntries(DIFFICULTIES.map(d => [d, `MBF.Difficulty.${d}`])),
       remnantOptions: Object.fromEntries(REMNANTS.map(r => [r, `MBF.Remnants.${r}`])),
       dcHint: F("MBF.Reward.DCHint", DIFFICULTY_DC),
-      actors: candidates().map(({ actor, checked }) => ({ uuid: actor.uuid, name: actor.name, img: actor.img, checked, dice }))
+      actors: candidates().map(({ actor, checked }) => ({ uuid: actor.uuid, name: actor.name, img: actor.img, checked, dice })),
+      buttons: [{ type: "submit", icon: "fa-solid fa-gears", label: "MBF.Reward.Release" }]
     };
   }
 

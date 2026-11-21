@@ -6,6 +6,7 @@ import { registerReleaseQueries, renderReleaseCard } from "./release.mjs";
 import { openScrapReward } from "./reward-dialog.mjs";
 import { registerSellQueries, addSellOption } from "./sell.mjs";
 import { registerLootTableMenu } from "./table-editor.mjs";
+import { sortScrapIntoLoot, registerContextMenuHooks } from "./sheets.mjs";
 
 Hooks.once("init", () => {
   registerCurrencySetting();
@@ -21,6 +22,8 @@ Hooks.once("init", () => {
 });
 
 Hooks.once("ready", async () => {
+  // "Sell" in the item menu (⋮ / right click) of scrap – on every character sheet class (Daggerheart, Sleek UI, …).
+  registerContextMenuHooks(addSellOption);
   await applyCurrency();
   console.log(`${MODULE_ID} | Ready.`);
 });
@@ -42,5 +45,5 @@ Hooks.on("getSceneControlButtons", controls => {
 
 Hooks.on("renderChatMessageHTML", (message, html) => renderReleaseCard(message, html));
 
-// "Sell" in the item menu (⋮) of scrap on the character sheet.
-Hooks.on("getCharacterSheetContextOptions", addSellOption);
+// Sheets that draw their own inventory (Daggerheart Sleek UI): scrap into a "Loot" section.
+Hooks.on("renderCharacterSheet", sortScrapIntoLoot);

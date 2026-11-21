@@ -18,8 +18,10 @@ export class LootTableEditor extends HandlebarsApplicationMixin(ApplicationV2) {
     actions: { reset: LootTableEditor.#onReset }
   };
 
+  // Foundry 14: every part must render exactly one root element, so the footer is its own part.
   static PARTS = {
-    form: { template: `modules/${MODULE_ID}/templates/loot-table.hbs` }
+    form: { template: `modules/${MODULE_ID}/templates/loot-table.hbs` },
+    footer: { template: "templates/generic/form-footer.hbs" }
   };
 
   async _prepareContext() {
@@ -33,7 +35,11 @@ export class LootTableEditor extends HandlebarsApplicationMixin(ApplicationV2) {
         cells: DIFFICULTIES.map(d => ({
           dice: KIND_ORDER.map(k => ({ name: `${r}.${d}.${k}`, value: table[r][d][k], kind: k, title: `${KINDS[k].plural} (d${KINDS[k].die})` }))
         }))
-      }))
+      })),
+      buttons: [
+        { type: "button", action: "reset", icon: "fa-solid fa-rotate-left", label: "MBF.Table.Reset" },
+        { type: "submit", icon: "fa-solid fa-floppy-disk", label: "MBF.Table.Save" }
+      ]
     };
   }
 
