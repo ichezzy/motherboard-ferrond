@@ -1,7 +1,7 @@
 # Motherboard: Ferrond
 
 A Foundry VTT module for the Daggerheart campaign *White Signal*, set in Ferrond.
-It holds the setting's house rules. Version 0.1 covers money and scrap.
+It holds the setting's house rules: money, scrap loot and the scrap trade.
 
 - Foundry VTT 14, Daggerheart system 2.12.9
 - Works together with [dh-ikonis](https://git.geeks.gay/cosmo/dh-ikonis) (Ikonis weapons and augments)
@@ -31,9 +31,19 @@ A roll between two numbers gives the lower piece (a 2 on the Metals die is Alumi
 
 Scrap items get their own **Loot** section in the inventory and show kind and worth as tags.
 
+### The Ferrond toolbar
+
+The scene controls on the left get their own group **Ferrond** (gear):
+
+- **Scrap Reward** (GM) – release scrap after a fight or a search.
+- **Scrap Shack** – the GM manages the shop; players see the group only while a shop is open
+  and use it to browse the shop.
+
+The group has no canvas layer of its own, so the token layer stays active while it is selected.
+
 ### Scrap Reward (GM)
 
-The token tools on the left get a **Scrap Reward** button (gears icon):
+**Ferrond → Scrap Reward**:
 
 1. Choose **Fight** (Easy … Very Difficult) or **Search** without a fight (type the DC:
    up to 12 Easy, 13–17 Standard, 18–22 Difficult, 23+ Very Difficult).
@@ -57,10 +67,28 @@ Default loot table (dice per player):
 
 *S = Shard, M = Metal, C = Component.* Change it in the module settings: **Edit loot table**.
 
-### Selling scrap
+### Scrap Shack
 
-Scrap items have **Sell** in their item menu (⋮). The player picks how many; the GM gets
-**Approve / Deny** (in Ferrond you sell in town). Only on approval the pieces leave the
+**Ferrond → Scrap Shack** (GM): name the shop and check the daily stock – rolled like the SRD,
+1d10 of each Shard, 1d8 of each Metal, 1d6 of each Component – then **Open shop**.
+Every number can be changed. **New day** rolls a new stock, **Close shop** closes it.
+One shop is open at a time.
+
+**An open shop is the GM's approval.** Players open the shop from the Ferrond group or from the
+chat card and trade without asking:
+
+- **Buy**: pick quantities, see the total and your money; the button stays off if the money is
+  not enough. Payment makes change in Ferrond's ladder – a Gear (1 Bit) paid with a Chunk gives
+  7 Bytes and 7 Bits back.
+- **Sell**: your scrap at its worth; sold pieces go into the shop's stock.
+
+Prices are the scrap values, for buying and selling alike. Every trade runs through the GM's
+client (stock and money are checked again) and is posted in the chat.
+
+### Selling scrap outside a shop
+
+Scrap items have **Sell** in their item menu (⋮ or right click). The player picks how many; the
+GM gets **Approve / Deny** (in Ferrond you sell in town). Only on approval the pieces leave the
 inventory and their worth is added to the matching currency. The sale appears in the chat.
 
 ## Settings
@@ -68,7 +96,8 @@ inventory and their worth is added to the matching currency. The sale appears in
 - **Bits, Bytes and Chunks** – on by default. Off keeps whatever currency is set.
 - **Edit loot table** – dice per player for every row and column.
 
-For macros: `game.modules.get("motherboard-ferrond").api.openScrapReward()`.
+For macros: `game.modules.get("motherboard-ferrond").api` has `openScrapReward()`,
+`openShopManager()` and `openShopWindow()`.
 
 ## Install
 

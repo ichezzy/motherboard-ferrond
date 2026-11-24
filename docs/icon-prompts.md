@@ -156,3 +156,17 @@ Minimal flat UI icon for a digital currency in a sci-fi game interface. Use the 
 ```
 Minimal flat UI icon for a digital currency in a sci-fi game interface. Use the attached reference icon for style and base shape: the same round symbol with a solid inner disc, a thin dark gap and an outer ring, the same thick dark outline and the same flat look. Flat vector style, one main color plus one darker shade of it. No texture, no grime, no gradients, no shading, no reflections, no 3D, no perspective, straight front view. Centered on a square 512×512 canvas, filling about 70% with generous padding. Transparent background, no text, no letters, no numbers, no logos. It must stay readable at 16×16 pixels. Subject: one data chunk — the same round symbol, now in rich gold. On the inner disc sits a larger square microchip as a simple dark silhouette with short pins on all four sides and a small round dot in one corner; eight thin circuit lines run from the chip outwards, each ending in a small round solder dot, and the outer ring carries four small square connector pads.
 ```
+
+---
+
+## Toolbar — shown in the scene controls on the left
+
+Foundry draws toolbar icons as one flat color (it follows the UI theme), so these are
+**silhouettes**: only the shape counts, colors are ignored. Save as PNG or WebP with a
+transparent background.
+
+### Screw (Scrap Reward) → `tools/screw.webp`
+
+```
+Minimal flat glyph icon for a game toolbar. A single machine screw, seen from the side and tilted about 45 degrees: a round slotted head and a threaded shaft with four or five clear thread ridges. One solid silhouette in plain white on a transparent background, bold simple shapes, no outline, no shading, no gradients, no texture, no 3D, no perspective, no text, no letters, no numbers, no logos. Centered on a square 512×512 canvas, filling about 75%. It must stay readable at 20×20 pixels.
+```
