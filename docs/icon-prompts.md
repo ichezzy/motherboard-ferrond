@@ -174,7 +174,7 @@ Put the full-size image into `art/originals/<name>.webp`; `npm run icons` makes 
 Minimal flat glyph icon for a game toolbar. A single machine screw, seen from the side and tilted about 45 degrees: a round slotted head and a threaded shaft with four or five clear thread ridges. One solid silhouette in plain white on a transparent background, bold simple shapes, no outline, no shading, no gradients, no texture, no 3D, no perspective, no text, no letters, no numbers, no logos. Centered on a square 512×512 canvas, filling about 75%. It must stay readable at 20×20 pixels.
 ```
 
-### Wrench (Crafting, later) → `art/originals/wrench.webp`
+### Wrench (Crafting, later) → `art/originals/wrench.webp` ✅
 
 Attach the finished screw icon as the style reference.
 

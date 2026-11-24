@@ -39,6 +39,7 @@ button.icon.mbf-currency {
   mask: var(--mbf-tool-mask) center / contain no-repeat;
 }
 .mbf-tool-screw { --mbf-tool-mask: url("../assets/icons/tools/screw.webp"); }
+.mbf-tool-wrench { --mbf-tool-mask: url("../assets/icons/tools/wrench.webp"); } /* crafting, later */
 
 .mbf-hidden { display: none !important; }
 
