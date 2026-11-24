@@ -26,6 +26,20 @@ button.icon.mbf-currency {
   background-size: 70%;
 }
 
+/* ---------- Toolbar icons (own white silhouettes, drawn in the button's text color) ---------- */
+
+.mbf-tool-icon::before {
+  content: "";
+  display: block;
+  width: 1.25em;
+  height: 1.25em;
+  margin: auto;
+  background-color: currentColor;
+  -webkit-mask: var(--mbf-tool-mask) center / contain no-repeat;
+  mask: var(--mbf-tool-mask) center / contain no-repeat;
+}
+.mbf-tool-screw { --mbf-tool-mask: url("../assets/icons/tools/screw.webp"); }
+
 .mbf-hidden { display: none !important; }
 
 /* ---------- Scrap Reward dialog (GM) ---------- */

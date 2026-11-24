@@ -112,7 +112,7 @@ https://github.com/ichezzy/motherboard-ferrond/releases/latest/download/module.j
 ```
 npm install
 npm test               # rules and release helpers
-npm run icons          # art/originals/*.webp → assets/icons (trimmed, 512 px / 256 px)
+npm run icons          # art/originals/*.webp → assets/icons (trimmed, 512 / 256 / 128 px)
 npm run packs          # build packs/ from scripts/data.mjs
 ```
 

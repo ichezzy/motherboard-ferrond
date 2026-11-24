@@ -23,7 +23,7 @@ export function addFerrondControls(controls) {
     tools.mbfScrapReward = {
       name: "mbfScrapReward",
       title: "MBF.Reward.Title",
-      icon: "fa-solid fa-screwdriver",
+      icon: "mbf-tool-icon mbf-tool-screw",
       order: 1,
       button: true,
       onChange: () => openScrapReward()

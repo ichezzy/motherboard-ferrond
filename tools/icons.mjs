@@ -6,6 +6,7 @@
  *
  * Scrap items -> assets/icons/scrap/<key>.webp (512 px)
  * Currency    -> assets/icons/currency/<key>.webp (256 px, shown tiny in the sheet)
+ * Toolbar     -> assets/icons/tools/<key>.webp (128 px, white silhouettes used as a CSS mask)
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -19,6 +20,7 @@ const SOURCE = path.join(ROOT, "art", "originals");
 /** File names in art/originals that differ from the item key. */
 const ALIASES = { aluminium: "aluminum" };
 const CURRENCY = ["bits", "bytes", "chunks"];
+const TOOLS = ["screw", "wrench"];
 const SCRAP_KEYS = new Set(SCRAP_ITEMS.map(i => i.key));
 
 const CLEAR = { r: 0, g: 0, b: 0, alpha: 0 };
@@ -46,6 +48,7 @@ for (const file of fs.readdirSync(SOURCE).filter(f => /\.(webp|png|jpe?g)$/i.tes
   let size;
   if (SCRAP_KEYS.has(key)) [target, size] = [path.join(ROOT, "assets", "icons", "scrap", `${key}.webp`), 512];
   else if (CURRENCY.includes(key)) [target, size] = [path.join(ROOT, "assets", "icons", "currency", `${key}.webp`), 256];
+  else if (TOOLS.includes(key)) [target, size] = [path.join(ROOT, "assets", "icons", "tools", `${key}.webp`), 128];
   else {
     unknown.push(file);
     continue;
@@ -55,7 +58,7 @@ for (const file of fs.readdirSync(SOURCE).filter(f => /\.(webp|png|jpe?g)$/i.tes
   done.push(key);
 }
 
-const missing = [...SCRAP_KEYS, ...CURRENCY].filter(k => !done.includes(k));
+const missing = [...SCRAP_KEYS, ...CURRENCY, ...TOOLS].filter(k => !done.includes(k));
 console.log(`Converted ${done.length} icons.`);
 if (missing.length) console.log(`Missing: ${missing.join(", ")}`);
 if (unknown.length) console.log(`Not used (unknown name): ${unknown.join(", ")}`);
