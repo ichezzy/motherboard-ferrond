@@ -19,8 +19,8 @@
 
   {{#if actor}}
   <nav class="mbf-shop-tabs">
-    <button type="button" data-action="tab" data-tab="buy" class="{{#if isBuy}}active{{/if}}"><i class="fa-solid fa-cart-shopping"></i> {{localize "MBF.Shop.TabBuy"}}</button>
-    <button type="button" data-action="tab" data-tab="sell" class="{{#if isSell}}active{{/if}}"><i class="fa-solid fa-hand-holding-dollar"></i> {{localize "MBF.Shop.TabSell"}}</button>
+    <button type="button" data-action="switchTab" data-tab="buy" class="{{#if isBuy}}active{{/if}}"><i class="fa-solid fa-cart-shopping"></i> {{localize "MBF.Shop.TabBuy"}}</button>
+    <button type="button" data-action="switchTab" data-tab="sell" class="{{#if isSell}}active{{/if}}"><i class="fa-solid fa-hand-holding-dollar"></i> {{localize "MBF.Shop.TabSell"}}</button>
   </nav>
 
   <div class="mbf-shop-list">

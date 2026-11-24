@@ -27,7 +27,7 @@ export class ShopWindow extends HandlebarsApplicationMixin(ApplicationV2) {
     window: { title: "MBF.Shop.Title", icon: "fa-solid fa-store", resizable: true },
     position: { width: 560, height: 640 },
     actions: {
-      tab: ShopWindow.#onTab,
+      switchTab: ShopWindow.#onSwitchTab,
       buy: ShopWindow.#onBuy,
       sell: ShopWindow.#onSell
     }
@@ -144,7 +144,7 @@ export class ShopWindow extends HandlebarsApplicationMixin(ApplicationV2) {
     }
   }
 
-  static #onTab(event, target) {
+  static #onSwitchTab(event, target) {
     this.#tab = target.dataset.tab === "sell" ? "sell" : "buy";
     this.render();
   }

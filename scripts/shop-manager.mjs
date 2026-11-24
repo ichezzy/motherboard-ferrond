@@ -21,7 +21,7 @@ export class ShopManager extends HandlebarsApplicationMixin(ApplicationV2) {
     actions: {
       reroll: ShopManager.#onReroll,
       newDay: ShopManager.#onNewDay,
-      close: ShopManager.#onClose,
+      closeShop: ShopManager.#onCloseShop,
       browse: () => openShopWindow()
     }
   };
@@ -50,7 +50,7 @@ export class ShopManager extends HandlebarsApplicationMixin(ApplicationV2) {
       ? [
         { type: "button", action: "browse", icon: "fa-solid fa-basket-shopping", label: "MBF.Shop.Browse" },
         { type: "button", action: "newDay", icon: "fa-solid fa-sun", label: "MBF.Shop.NewDay" },
-        { type: "button", action: "close", icon: "fa-solid fa-door-closed", label: "MBF.Shop.Close" },
+        { type: "button", action: "closeShop", icon: "fa-solid fa-door-closed", label: "MBF.Shop.Close" },
         { type: "submit", icon: "fa-solid fa-floppy-disk", label: "MBF.Shop.Save" }
       ]
       : [
@@ -90,9 +90,10 @@ export class ShopManager extends HandlebarsApplicationMixin(ApplicationV2) {
     await newDay(name || undefined);
   }
 
-  static async #onClose() {
+  // Not "close": Foundry reserves that action name for closing the window itself.
+  static async #onCloseShop() {
+    this.#draft = null; // the window re-renders on the shop change and rolls a fresh stock
     await closeShop();
-    this.#draft = null;
   }
 }
 
