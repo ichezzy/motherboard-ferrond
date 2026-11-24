@@ -109,3 +109,49 @@ button.icon.mbf-currency {
 .mbf-loot-table .mbf-legend-0 { color: #c9772f; }
 .mbf-loot-table .mbf-legend-1 { color: #9aa3b2; }
 .mbf-loot-table .mbf-legend-2 { color: #2fb3a6; }
+
+/* ---------- Scrap Shack: GM window ---------- */
+
+.mbf-shop-manager .mbf-shop-manager-body { display: flex; flex-direction: column; gap: 0.5rem; }
+.mbf-shop-manager .mbf-shop-status { margin: 0; font-style: italic; opacity: 0.8; }
+.mbf-shop-manager .mbf-shop-status.is-open { color: #2fb3a6; font-style: normal; font-weight: 600; opacity: 1; }
+.mbf-shop-manager .mbf-shop-groups { display: flex; flex-direction: column; gap: 0.4rem; max-height: 460px; overflow-y: auto; }
+.mbf-shop-manager .mbf-shop-group { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 1rem; margin: 0; padding: 0.3rem 0.5rem; }
+.mbf-shop-manager .mbf-stock-row { display: flex; align-items: center; gap: 0.4rem; }
+.mbf-shop-manager .mbf-stock-row img { width: 26px; height: 26px; border: none; flex: 0 0 auto; }
+.mbf-shop-manager .mbf-stock-name { flex: 1 1 auto; }
+.mbf-shop-manager .mbf-stock-price { font-size: 0.8em; opacity: 0.75; white-space: nowrap; }
+.mbf-shop-manager .mbf-stock-row input { width: 3.2em; flex: 0 0 auto; text-align: center; }
+
+/* ---------- Scrap Shack: shop window ---------- */
+
+.mbf-shop-window .window-content { padding: 0.5rem; }
+.mbf-shop-window .mbf-shop-body { display: flex; flex-direction: column; gap: 0.5rem; height: 100%; }
+.mbf-shop-window .mbf-shop-head { display: flex; flex-direction: column; gap: 0.3rem; }
+.mbf-shop-window .mbf-shop-name { font-size: 1.15em; }
+.mbf-shop-window .mbf-shop-actor { display: flex; align-items: center; gap: 0.6rem; }
+.mbf-shop-window .mbf-shop-actor select { flex: 1 1 auto; }
+.mbf-shop-window .mbf-shop-actor-name { flex: 1 1 auto; font-weight: 600; }
+.mbf-shop-window .mbf-wallet { display: flex; gap: 0.6rem; white-space: nowrap; }
+.mbf-shop-window .mbf-wallet-part { display: inline-flex; align-items: center; gap: 0.25rem; font-weight: 600; }
+.mbf-shop-window .mbf-shop-tabs { display: flex; gap: 0.3rem; }
+.mbf-shop-window .mbf-shop-tabs button { flex: 1 1 0; }
+.mbf-shop-window .mbf-shop-tabs button.active { border-color: #2fb3a6; box-shadow: 0 0 4px #2fb3a6; }
+.mbf-shop-window .mbf-shop-list { flex: 1 1 auto; overflow-y: auto; display: flex; flex-direction: column; gap: 0.4rem; }
+.mbf-shop-window .mbf-shop-group { margin: 0; padding: 0.2rem 0.4rem; display: flex; flex-direction: column; gap: 2px; }
+.mbf-shop-window .mbf-shop-row { display: flex; align-items: center; gap: 0.5rem; }
+.mbf-shop-window .mbf-shop-row img { width: 30px; height: 30px; border: none; flex: 0 0 auto; }
+.mbf-shop-window .mbf-row-name { flex: 1 1 auto; }
+.mbf-shop-window .mbf-row-price { min-width: 6em; text-align: right; opacity: 0.85; }
+.mbf-shop-window .mbf-row-stock { min-width: 2.5em; text-align: right; font-size: 0.85em; opacity: 0.7; }
+.mbf-shop-window .mbf-row-stock::after { content: " ×"; }
+.mbf-shop-window .mbf-shop-row input { width: 3.4em; flex: 0 0 auto; text-align: center; }
+.mbf-shop-window .mbf-sold-out { opacity: 0.4; }
+.mbf-shop-window .mbf-shop-foot { display: flex; align-items: center; gap: 0.6rem; padding-top: 0.3rem; border-top: 1px solid var(--color-border, #7a7971); }
+.mbf-shop-window .mbf-total { flex: 1 1 auto; font-weight: 600; }
+.mbf-shop-window .mbf-warning { color: #d9534f; font-size: 0.85em; }
+.mbf-shop-window .mbf-shop-foot button { flex: 0 0 auto; width: auto; padding: 0 1rem; }
+.mbf-shop-window .mbf-empty { font-style: italic; opacity: 0.8; }
+
+/* "Browse" button on the shop card in the chat */
+.chat-message button.mbf-shop-open { margin-top: 0.3rem; }

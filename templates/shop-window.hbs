@@ -1,0 +1,69 @@
+<div class="mbf-shop-body">
+  <header class="mbf-shop-head">
+    <div class="mbf-shop-name"><i class="fa-solid fa-store"></i> <strong>{{shopName}}</strong></div>
+    {{#if actor}}
+    <div class="mbf-shop-actor">
+      {{#if multipleActors}}
+      <select data-mbf-actor>
+        {{#each actors}}<option value="{{uuid}}"{{#if selected}} selected{{/if}}>{{name}}</option>{{/each}}
+      </select>
+      {{else}}
+      <span class="mbf-shop-actor-name">{{actor.name}}</span>
+      {{/if}}
+      <span class="mbf-wallet">
+        {{#each wallet}}<span class="mbf-wallet-part" data-tooltip="{{label}}"><i class="{{icon}}"></i> {{value}}</span>{{/each}}
+      </span>
+    </div>
+    {{/if}}
+  </header>
+
+  {{#if actor}}
+  <nav class="mbf-shop-tabs">
+    <button type="button" data-action="tab" data-tab="buy" class="{{#if isBuy}}active{{/if}}"><i class="fa-solid fa-cart-shopping"></i> {{localize "MBF.Shop.TabBuy"}}</button>
+    <button type="button" data-action="tab" data-tab="sell" class="{{#if isSell}}active{{/if}}"><i class="fa-solid fa-hand-holding-dollar"></i> {{localize "MBF.Shop.TabSell"}}</button>
+  </nav>
+
+  <div class="mbf-shop-list">
+    {{#if isBuy}}
+    {{#each buyGroups}}
+    <fieldset class="mbf-shop-group">
+      <legend>{{label}}</legend>
+      {{#each pieces}}
+      <div class="mbf-shop-row{{#unless stock}} mbf-sold-out{{/unless}}">
+        <img src="{{img}}" alt="">
+        <span class="mbf-row-name">{{name}}</span>
+        <span class="mbf-row-price">{{priceText}}</span>
+        <span class="mbf-row-stock">{{stock}}</span>
+        <input type="number" data-mbf-buy="{{key}}" value="{{qty}}" min="0" max="{{stock}}" step="1" placeholder="0"{{#unless stock}} disabled{{/unless}}>
+      </div>
+      {{/each}}
+    </fieldset>
+    {{/each}}
+    {{else}}
+    {{#each sellRows}}
+    <div class="mbf-shop-row">
+      <img src="{{img}}" alt="">
+      <span class="mbf-row-name">{{name}}</span>
+      <span class="mbf-row-price">{{priceText}}</span>
+      <span class="mbf-row-stock">{{have}}</span>
+      <input type="number" data-mbf-sell="{{id}}" value="{{qty}}" min="0" max="{{have}}" step="1" placeholder="0">
+    </div>
+    {{else}}
+    <p class="mbf-empty">{{localize "MBF.Shop.NothingToSell"}}</p>
+    {{/each}}
+    {{/if}}
+  </div>
+
+  <footer class="mbf-shop-foot">
+    <span class="mbf-total" data-mbf-total></span>
+    <span class="mbf-warning" data-mbf-warning></span>
+    {{#if isBuy}}
+    <button type="button" data-action="buy" data-mbf-submit><i class="fa-solid fa-cart-shopping"></i> {{localize "MBF.Shop.Buy"}}</button>
+    {{else}}
+    <button type="button" data-action="sell" data-mbf-submit><i class="fa-solid fa-hand-holding-dollar"></i> {{localize "MBF.Shop.Sell"}}</button>
+    {{/if}}
+  </footer>
+  {{else}}
+  <p class="mbf-empty">{{localize "MBF.Shop.NoCharacter"}}</p>
+  {{/if}}
+</div>

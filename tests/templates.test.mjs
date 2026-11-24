@@ -26,7 +26,13 @@ const SAMPLE = {
   actors: [{ uuid: "Actor.x", name: "Mara", img: "a.webp", checked: true, dice: { shard: 2, metal: 1, component: 0 } }],
   kinds: [{ short: "Shards", die: 6 }], max: 20,
   columns: [{ label: "Easy", dc: 10 }],
-  rows: [{ label: "None", cells: [{ dice: [{ name: "none.easy.shard", value: 1, kind: "shard", title: "Shards" }] }] }]
+  rows: [{ label: "None", cells: [{ dice: [{ name: "none.easy.shard", value: 1, kind: "shard", title: "Shards" }] }] }],
+  // Scrap Shack
+  name: "Rooks Stand", open: true, status: "Open", groups: [{ label: "Shards", pieces: [{ key: "gear", name: "Gear", img: "g.webp", priceText: "1 Bit", stock: 3 }] }],
+  shopName: "Rooks Stand", actor: { name: "Mara" }, multipleActors: true, actors: [{ uuid: "Actor.x", name: "Mara", selected: true }],
+  wallet: [{ icon: "mbf-currency", label: "Bits", value: 4 }], isBuy: true, isSell: false,
+  buyGroups: [{ label: "Shards", pieces: [{ key: "gear", name: "Gear", img: "g.webp", priceText: "1 Bit", stock: 0, qty: "" }] }],
+  sellRows: [{ id: "i1", name: "Coil", img: "c.webp", have: 2, priceText: "2 Bits", qty: 1 }]
 };
 
 const VOID = new Set(["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"]);

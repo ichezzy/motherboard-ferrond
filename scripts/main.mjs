@@ -7,6 +7,10 @@ import { openScrapReward } from "./reward-dialog.mjs";
 import { registerSellQueries, addSellOption } from "./sell.mjs";
 import { registerLootTableMenu } from "./table-editor.mjs";
 import { sortScrapIntoLoot, registerContextMenuHooks } from "./sheets.mjs";
+import { registerShop, renderShopCard, SHOP_HOOK } from "./shop.mjs";
+import { openShopManager, registerShopManagerRefresh } from "./shop-manager.mjs";
+import { openShopWindow, registerShopWindowRefresh } from "./shop-window.mjs";
+import { addFerrondControls, refreshControls } from "./controls.mjs";
 
 Hooks.once("init", () => {
   registerCurrencySetting();
@@ -16,34 +20,30 @@ Hooks.once("init", () => {
   registerScrapCategory();
   registerReleaseQueries();
   registerSellQueries();
+  registerShop();
 
-  // For macros: game.modules.get("motherboard-ferrond").api.openScrapReward()
-  game.modules.get(MODULE_ID).api = { openScrapReward };
+  // For macros: game.modules.get("motherboard-ferrond").api.openScrapReward() etc.
+  game.modules.get(MODULE_ID).api = { openScrapReward, openShopManager, openShopWindow };
 });
 
 Hooks.once("ready", async () => {
   // "Sell" in the item menu (⋮ / right click) of scrap – on every character sheet class (Daggerheart, Sleek UI, …).
   registerContextMenuHooks(addSellOption);
+  registerShopManagerRefresh();
+  registerShopWindowRefresh();
+  // Players see the Ferrond group only while a shop is open.
+  Hooks.on(SHOP_HOOK, () => refreshControls());
   await applyCurrency();
   console.log(`${MODULE_ID} | Ready.`);
 });
 
-// GM button in the token tools on the left: "Scrap Reward".
-Hooks.on("getSceneControlButtons", controls => {
-  const tokens = controls.tokens;
-  if (!tokens?.tools || !game.user.isGM) return;
-  tokens.tools.mbfScrapReward = {
-    name: "mbfScrapReward",
-    title: "MBF.Reward.Title",
-    icon: "fa-solid fa-gears",
-    order: Object.keys(tokens.tools).length,
-    button: true,
-    visible: true,
-    onChange: () => openScrapReward()
-  };
-});
+// The "Ferrond" group on the left (gear): Scrap Reward and Scrap Shack.
+Hooks.on("getSceneControlButtons", addFerrondControls);
 
-Hooks.on("renderChatMessageHTML", (message, html) => renderReleaseCard(message, html));
+Hooks.on("renderChatMessageHTML", (message, html) => {
+  renderReleaseCard(message, html);
+  renderShopCard(message, html, openShopWindow);
+});
 
 // Sheets that draw their own inventory (Daggerheart Sleek UI): scrap into a "Loot" section.
 Hooks.on("renderCharacterSheet", sortScrapIntoLoot);

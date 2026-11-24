@@ -1,0 +1,27 @@
+<div class="mbf-shop-manager-body standard-form">
+  <div class="form-group">
+    <label>{{localize "MBF.Shop.Name"}}</label>
+    <div class="form-fields">
+      <input type="text" name="name" value="{{name}}" placeholder="{{localize 'MBF.Shop.DefaultName'}}">
+    </div>
+  </div>
+  <p class="mbf-shop-status{{#if open}} is-open{{/if}}">{{status}}</p>
+
+  <div class="mbf-shop-groups">
+    {{#each groups}}
+    <fieldset class="mbf-shop-group">
+      <legend>{{label}}</legend>
+      {{#each pieces}}
+      <label class="mbf-stock-row">
+        <img src="{{img}}" alt="">
+        <span class="mbf-stock-name">{{name}}</span>
+        <span class="mbf-stock-price">{{priceText}}</span>
+        <input type="number" name="stock.{{key}}" value="{{stock}}" min="0" max="{{@root.max}}" step="1">
+      </label>
+      {{/each}}
+    </fieldset>
+    {{/each}}
+  </div>
+
+  <p class="hint">{{localize "MBF.Shop.ManagerHint"}}</p>
+</div>

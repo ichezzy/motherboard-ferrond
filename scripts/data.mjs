@@ -14,7 +14,9 @@ export const TABLE_PACK = "tables";
 /** Query names (Foundry User#query, answered by the active GM). */
 export const QUERY = {
   claim: `${MODULE_ID}.claimScrap`,
-  sell: `${MODULE_ID}.sellScrap`
+  sell: `${MODULE_ID}.sellScrap`,
+  shopBuy: `${MODULE_ID}.shopBuy`,
+  shopSell: `${MODULE_ID}.shopSell`
 };
 
 /* -------------------------------------------- */

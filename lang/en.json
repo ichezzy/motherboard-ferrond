@@ -98,6 +98,47 @@
       "Offline": "The GM has to be online for this.",
       "Busy": "This is already being handled.",
       "OnlyGM": "Only the GM can do this."
+    },
+    "Controls": {
+      "Ferrond": "Ferrond"
+    },
+    "Shop": {
+      "Title": "Scrap Shack",
+      "ManagerTitle": "Scrap Shack (GM)",
+      "DefaultName": "Scrap Shack",
+      "Name": "Name",
+      "StockDie": "daily stock 1d{die}",
+      "StatusOpen": "Open · day {day}",
+      "StatusClosed": "Closed. Check the stock, then open the shop.",
+      "ManagerHint": "Stock per piece, rolled like the SRD: 1d10 of each Shard, 1d8 of each Metal, 1d6 of each Component. Change any number. While the shop is open, players buy and sell without asking; every trade is posted in the chat.",
+      "Reroll": "Roll stock",
+      "Open": "Open shop",
+      "Save": "Save",
+      "Saved": "Shop saved.",
+      "NewDay": "New day",
+      "Close": "Close shop",
+      "Browse": "Browse",
+      "OpenedChat": "{name} is open.",
+      "ClosedChat": "{name} has closed.",
+      "ClosedNow": "The scrap shack has closed.",
+      "Closed": "No scrap shack is open right now.",
+      "TabBuy": "Buy",
+      "TabSell": "Sell",
+      "Buy": "Buy",
+      "Sell": "Sell",
+      "Total": "Total: {price}",
+      "YouGet": "You get: {price}",
+      "NotEnoughShort": "Not enough money",
+      "NothingToSell": "This character has no scrap.",
+      "NoCharacter": "You have no character to trade with.",
+      "BuyDone": "Bought. The scrap is in your inventory.",
+      "SellDone": "Sold.",
+      "NotEnough": "Not enough money for {price}.",
+      "OutOfStock": "The shop does not have that many any more.",
+      "Empty": "Choose at least one piece.",
+      "NotYours": "You can only trade for your own character.",
+      "BoughtChat": "{actor} bought {items} for {price} at {shop}.",
+      "SoldChat": "{actor} sold {items} for {price} at {shop}."
     }
   }
 }
