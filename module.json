@@ -1,8 +1,8 @@
 {
   "id": "motherboard-ferrond",
   "title": "Motherboard: Ferrond",
-  "description": "House rules for the Ferrond setting (White Signal, Daggerheart): Bits, Bytes and Chunks as currency, scrap loot the GM releases and the players roll, the Scrap Shack, selling scrap with GM approval, the Ikonis with its augments, tech damage, and a compendium of Ferrond items.",
-  "version": "0.3.0",
+  "description": "House rules for the Ferrond setting (White Signal, Daggerheart): Bits, Bytes and Chunks as currency, scrap loot the GM releases and the players roll, the Scrap Shack, selling scrap with GM approval, the Ikonis with its augments, crafting at the workbench, tech damage, and a compendium of Ferrond items.",
+  "version": "0.4.0",
   "authors": [
     {
       "name": "Chezzy"
@@ -10,7 +10,7 @@
   ],
   "url": "https://github.com/ichezzy/motherboard-ferrond",
   "manifest": "https://github.com/ichezzy/motherboard-ferrond/releases/latest/download/module.json",
-  "download": "https://github.com/ichezzy/motherboard-ferrond/releases/download/v0.3.0/motherboard-ferrond.zip",
+  "download": "https://github.com/ichezzy/motherboard-ferrond/releases/download/v0.4.0/motherboard-ferrond.zip",
   "compatibility": {
     "minimum": "14",
     "verified": "14.365",

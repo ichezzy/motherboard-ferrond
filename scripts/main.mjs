@@ -16,6 +16,9 @@ import { registerIkonisTab } from "./ikonis-sheet.mjs";
 import { makeIkonis, unmakeIkonis, installAugment, removeAugment } from "./ikonis.mjs";
 import { cleanUpDhIkonis } from "./ikonis-migrate.mjs";
 import { registerTechSetting, applyTech } from "./tech.mjs";
+import { registerCraftedCategories, addProduct } from "./crafted-items.mjs";
+import { watchDowntime, startProject, rollProject, buildConsumables, setRollReady } from "./crafting.mjs";
+import { openWorkbench, registerWorkbenchRefresh } from "./workbench.mjs";
 
 Hooks.once("init", () => {
   registerCurrencySetting();
@@ -29,11 +32,14 @@ Hooks.once("init", () => {
   registerTechSetting();
   // Augments: weapon features (installed) and an inventory category (not installed).
   registerAugments();
+  // Crafted things: devices, armor parts and blueprints get their own inventory sections.
+  registerCraftedCategories();
 
   // For macros: game.modules.get("motherboard-ferrond").api.openScrapReward() etc.
   game.modules.get(MODULE_ID).api = {
     openScrapReward, openShopManager, openShopWindow,
-    makeIkonis, unmakeIkonis, installAugment, removeAugment, addAugmentItem
+    makeIkonis, unmakeIkonis, installAugment, removeAugment, addAugmentItem,
+    openWorkbench, startProject, rollProject, buildConsumables, setRollReady, addProduct
   };
 });
 
@@ -45,6 +51,7 @@ Hooks.once("ready", async () => {
   registerContextMenuHooks(addSellOption);
   registerShopManagerRefresh();
   registerShopWindowRefresh();
+  registerWorkbenchRefresh();
   // Players see the Ferrond group only while a shop is open.
   Hooks.on(SHOP_HOOK, () => refreshControls());
   await applyCurrency();
@@ -61,6 +68,9 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
   renderReleaseCard(message, html);
   renderShopCard(message, html, openShopWindow);
 });
+
+// "Work on a Project" in Daggerheart's long rest dialog makes one crafting roll ready.
+Hooks.on("preCreateChatMessage", watchDowntime);
 
 // Sheets that draw their own inventory (Daggerheart Sleek UI): scrap and augments into own sections.
 Hooks.on("renderCharacterSheet", sortScrapIntoLoot);

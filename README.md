@@ -1,7 +1,7 @@
 # Motherboard: Ferrond
 
 A Foundry VTT module for the Daggerheart campaign *White Signal*, set in Ferrond.
-It holds the setting's house rules: money, scrap loot, the scrap trade and the Ikonis.
+It holds the setting's house rules: money, scrap loot, the scrap trade, the Ikonis and crafting.
 
 - Foundry VTT 14, Daggerheart system 2.12.9
 - Replaces [dh-ikonis](https://git.geeks.gay/cosmo/dh-ikonis): Ferrond brings its own Ikonis. Switch dh-ikonis off.
@@ -117,6 +117,32 @@ Augments come from the recipe table in the vault note *Crafting (DH)* (`npm run 
 (weapon features "Ikonis: …" on weapons and in the Homebrew settings). While dh-ikonis is on,
 the GM gets a reminder.
 
+### Crafting at the workbench
+
+Every character has a **workbench**: the **Crafting** bar at the top of the inventory opens it
+(Daggerheart's sheet and Sleek UI). The recipes come from the vault note *Crafting (DH)*.
+
+- **New project:** pick a recipe (augment, device, armor part). The list shows the parts with ✓/✗
+  against the scrap in the inventory, the tier it needs and whether it needs a blueprint. Starting
+  takes the parts out of the inventory; **Cancel** gives them back.
+- **Blueprints:** from Rare on you need the recipe's **blueprint item** in the inventory
+  (compendium folder *Blueprints*). It is not used up.
+- **The roll:** taking **Work on a Project** in Daggerheart's long rest dialog makes one roll ready
+  (the GM can also allow one by hand). It is Daggerheart's own Finesse action roll against the
+  project's Difficulty – Experiences, Hope and Fear as usual. The progress countdown moves like a
+  Dynamic Countdown: Critical −3, Success with Hope −2, with Fear −1, Failure with Hope 0, with Fear +1
+  (never above its start). At 0 the item is in the inventory.
+- **Consumables** are built in one roll (Difficulty 10): always at least one, up to tier + 1
+  (tier + 2 on a critical, never more than you laid out). With Fear one of them is **Flawed**: before
+  it works, a Fate Roll with the Hope Die – on 3 or more it works. Only the parts of what is built
+  are used.
+- The GM can change a project's Difficulty in the workbench. Everything is posted in the chat.
+- Stages: Consumable and Common Difficulty 10, Uncommon 12 (countdown 2), Rare 15 (3, Tier 2),
+  Very Rare 18 (4, Tier 3), Legendary 21 (5, Tier 4).
+
+The compendium has every product: devices, armor parts and blueprints as loot with their own
+inventory sections, consumables as Daggerheart consumables, augments as before.
+
 ### Tech damage
 
 Ferrond knows only physical and tech damage. The module names Daggerheart's magic damage **Tech**
@@ -130,7 +156,8 @@ Ferrond knows only physical and tech damage. The module names Daggerheart's magi
 
 For macros: `game.modules.get("motherboard-ferrond").api` has `openScrapReward()`,
 `openShopManager()`, `openShopWindow()`,
-`makeIkonis(weapon)`, `installAugment(weapon, item)`, `removeAugment(weapon, key)` and `addAugmentItem(actor, key)`.
+`makeIkonis(weapon)`, `installAugment(weapon, item)`, `removeAugment(weapon, key)`, `addAugmentItem(actor, key)`,
+`openWorkbench(actor)`, `setRollReady(actor, true)` and `addProduct(actor, key, count)`.
 
 ## Install
 

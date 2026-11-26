@@ -295,3 +295,182 @@ button.icon.mbf-currency {
 .mbf-ikonis-chat i {
   margin-right: 0.25rem;
 }
+
+/* ---------- Crafting: bar in the inventory ---------- */
+
+.mbf-workbench-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.4rem 0 0.6rem;
+}
+.mbf-workbench-bar button {
+  flex: none;
+  width: auto;
+  padding: 0 0.8rem;
+}
+.mbf-workbench-info {
+  font-size: var(--font-size-12, 0.85rem);
+  opacity: 0.8;
+}
+
+/* ---------- Crafting: workbench window ---------- */
+
+.mbf-workbench .window-content {
+  padding: 0;
+}
+.mbf-wb {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.mbf-wb-head {
+  flex: none;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.35);
+}
+.mbf-wb-roll {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.mbf-wb-roll span {
+  flex: 1;
+}
+.mbf-wb-roll.mbf-ready {
+  font-weight: bold;
+}
+.mbf-wb-roll button {
+  flex: none;
+  width: auto;
+  padding: 0 0.6rem;
+}
+.mbf-wb-views {
+  display: flex;
+  gap: 0.4rem;
+}
+.mbf-wb-views button {
+  flex: 1;
+}
+.mbf-wb-views button.active {
+  border-color: var(--color-border-highlight, #ff6400);
+  font-weight: bold;
+}
+.mbf-wb-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 0.75rem 0.75rem;
+}
+.mbf-wb-group {
+  margin: 0.8rem 0 0.3rem;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.35);
+}
+.mbf-wb-project,
+.mbf-wb-recipe {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  padding: 0.45rem 0.5rem;
+  margin-bottom: 0.4rem;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  border-radius: 6px;
+}
+.mbf-wb-recipe.mbf-off {
+  opacity: 0.6;
+}
+.mbf-wb-project > img,
+.mbf-wb-recipe > img {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border: none;
+  object-fit: contain;
+}
+.mbf-wb-main {
+  flex: 1;
+  min-width: 0;
+}
+.mbf-wb-sub {
+  font-size: var(--font-size-11, 0.75rem);
+  opacity: 0.75;
+  margin-left: 0.25rem;
+}
+.mbf-wb-line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.2rem 0;
+}
+.mbf-wb-dc input {
+  width: 3.2rem;
+  height: 1.6rem;
+  margin-left: 0.25rem;
+  text-align: center;
+}
+.mbf-wb-boxes i {
+  margin-right: 0.15rem;
+  font-size: 1.05rem;
+}
+.mbf-wb-effect p {
+  margin: 0.15rem 0;
+  font-size: var(--font-size-12, 0.85rem);
+}
+.mbf-wb-parts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.6rem;
+  font-size: var(--font-size-12, 0.85rem);
+}
+.mbf-wb-part {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.mbf-wb-part img {
+  width: 18px;
+  height: 18px;
+  border: none;
+}
+.mbf-wb-part.mbf-have {
+  color: var(--color-level-success, #2e7d32);
+}
+.mbf-wb-part.mbf-missing {
+  color: var(--color-level-error, #c0392b);
+}
+.mbf-wb-chip {
+  display: inline-block;
+  padding: 0 0.4rem;
+  margin-left: 0.3rem;
+  border: 1px solid rgba(127, 127, 127, 0.5);
+  border-radius: 999px;
+  font-size: var(--font-size-11, 0.75rem);
+}
+.mbf-wb-chip.mbf-have {
+  border-color: var(--color-level-success, #2e7d32);
+}
+.mbf-wb-buttons {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 7.5rem;
+}
+.mbf-wb-max {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: var(--font-size-12, 0.85rem);
+}
+.mbf-wb-max input {
+  width: 3.2rem;
+  height: 1.6rem;
+  text-align: center;
+}
+.mbf-wb-empty,
+.mbf-wb-blueprints {
+  opacity: 0.8;
+}
+.mbf-crafting-chat i {
+  margin-right: 0.25rem;
+}

@@ -11,6 +11,10 @@ import { scrapInfo } from "./scrap.mjs";
 import { STAGES } from "./recipes.mjs";
 import { augment } from "./ikonis-rules.mjs";
 import { augmentKeyOf } from "./augments.mjs";
+import { DEVICE_CATEGORY, ARMOR_PART_CATEGORY, recipe } from "./crafting-rules.mjs";
+import { blueprintKeyOf, craftedKeyOf } from "./crafted-items.mjs";
+import { craftingState } from "./crafting.mjs";
+import { openWorkbench } from "./workbench.mjs";
 
 const TAG_CLASS = { shard: "tag-orange", metal: "tag-blue", component: "tag-green" };
 
@@ -26,15 +30,26 @@ function augmentTags(item) {
   return recipe ? [[game.i18n.localize("MBF.Augment.Tag"), "tag-purple"], [STAGES[recipe.stage].label, "tag-purple"]] : [];
 }
 
+function stageTag(key, cls) {
+  const r = recipe(key);
+  return r ? [[STAGES[r.stage].label, cls]] : [];
+}
+
+const inCategory = category => item => item?.type === "loot" && item.system?.category === category && Boolean(craftedKeyOf(item));
+
 /** Own sections after Sleek's loot section, in this order. */
 const SECTIONS = [
   { id: "mbf-scrap", title: "MBF.Scrap.SheetGroup", match: item => Boolean(scrapInfo(item)), tags: scrapTags },
-  { id: "mbf-augments", title: "MBF.Augment.SheetGroup", match: item => Boolean(augmentKeyOf(item)), tags: augmentTags }
+  { id: "mbf-augments", title: "MBF.Augment.SheetGroup", match: item => Boolean(augmentKeyOf(item)), tags: augmentTags },
+  { id: "mbf-devices", title: "MBF.Crafting.Group.device", match: inCategory(DEVICE_CATEGORY), tags: item => stageTag(craftedKeyOf(item), "tag-blue") },
+  { id: "mbf-armor-parts", title: "MBF.Crafting.Group.armorPart", match: inCategory(ARMOR_PART_CATEGORY), tags: item => stageTag(craftedKeyOf(item), "tag-blue") },
+  { id: "mbf-blueprints", title: "MBF.Crafting.Group.blueprint", match: item => Boolean(blueprintKeyOf(item)), tags: item => stageTag(blueprintKeyOf(item), "tag-orange") }
 ];
 
 /** Hook "renderCharacterSheet" (fires for subclasses like SleekCharacterSheet too). */
 export function sortScrapIntoLoot(app, element) {
   const root = element ?? app?.element;
+  addWorkbenchBar(app, root);
   const lootSection = root?.querySelector?.(".category-wrapper[data-category-id='loot']");
   if (!lootSection) return; // Daggerheart's own sheet: the item categories do the job
 
@@ -101,4 +116,43 @@ export function registerContextMenuHooks(handler) {
   }
   for (const name of names) Hooks.on(`get${name}ContextOptions`, handler);
   console.log(`${MODULE_ID} | "Sell" added to the item menus of: ${[...names].join(", ")}`);
+}
+
+/**
+ * The "Crafting" bar at the top of the inventory: opens the workbench and shows the state.
+ * Sleek UI: first thing in ".inventory-tab". Daggerheart: after the search bar of the inventory tab.
+ */
+function addWorkbenchBar(app, root) {
+  const actor = app?.document ?? app?.actor;
+  if (!root || actor?.type !== "character" || !(actor.isOwner || game.user.isGM)) return;
+  if (root.querySelector(".mbf-workbench-bar")) return;
+  const sleek = root.querySelector(".inventory-tab");
+  const dhTab = root.querySelector("section.tab[data-tab='inventory']");
+  if (!sleek && !dhTab) return;
+
+  const state = craftingState(actor);
+  const count = Object.keys(state.projects).length;
+  const bar = document.createElement("div");
+  bar.className = "mbf-workbench-bar";
+  const button = document.createElement("button");
+  button.type = "button";
+  button.innerHTML = `<i class="fa-solid fa-screwdriver-wrench"></i> ${game.i18n.localize("MBF.Crafting.Open")}`;
+  button.addEventListener("click", event => {
+    event.preventDefault();
+    event.stopPropagation();
+    openWorkbench(actor);
+  });
+  const info = document.createElement("span");
+  info.className = "mbf-workbench-info";
+  const parts = [game.i18n.format(count === 1 ? "MBF.Crafting.OneProject" : "MBF.Crafting.Projects", { count })];
+  if (state.rollReady) parts.push(game.i18n.localize("MBF.Crafting.RollReadyShort"));
+  info.textContent = parts.join(" · ");
+  bar.append(button, info);
+
+  if (sleek) sleek.prepend(bar);
+  else {
+    const search = dhTab.querySelector(".search-section");
+    if (search) search.after(bar);
+    else dhTab.prepend(bar);
+  }
 }

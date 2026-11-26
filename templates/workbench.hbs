@@ -1,0 +1,104 @@
+<div class="mbf-wb">
+  <header class="mbf-wb-head">
+    <div class="mbf-wb-roll {{#if rollReady}}mbf-ready{{/if}}">
+      <i class="fa-solid {{#if rollReady}}fa-dice-d12{{else}}fa-bed{{/if}}"></i>
+      <span>{{#if rollReady}}{{localize "MBF.Crafting.RollReady"}}{{else}}{{localize "MBF.Crafting.RollNotReady"}}{{/if}}</span>
+      {{#if isGM}}
+      {{#if rollReady}}
+      <button type="button" data-action="mbfGrantRoll" data-ready="false"><i class="fa-solid fa-ban"></i> {{localize "MBF.Crafting.TakeBack"}}</button>
+      {{else}}
+      <button type="button" data-action="mbfGrantRoll" data-ready="true"><i class="fa-solid fa-dice-d12"></i> {{localize "MBF.Crafting.AllowRoll"}}</button>
+      {{/if}}
+      {{/if}}
+    </div>
+    <nav class="mbf-wb-views">
+      <button type="button" data-action="mbfView" data-view="projects" class="{{#if isProjects}}active{{/if}}"><i class="fa-solid fa-hourglass-half"></i> {{localize "MBF.Crafting.ViewProjects"}}</button>
+      <button type="button" data-action="mbfView" data-view="new" class="{{#if isNew}}active{{/if}}"><i class="fa-solid fa-plus"></i> {{localize "MBF.Crafting.ViewNew"}}</button>
+      <button type="button" data-action="mbfView" data-view="consumables" class="{{#if isConsumables}}active{{/if}}"><i class="fa-solid fa-flask"></i> {{localize "MBF.Crafting.ViewConsumables"}}</button>
+    </nav>
+  </header>
+
+  <div class="mbf-wb-scroll">
+    {{#if isProjects}}
+    {{#each projects}}
+    <section class="mbf-wb-project">
+      <img src="{{img}}" alt="">
+      <div class="mbf-wb-main">
+        <div class="mbf-wb-title"><strong>{{name}}</strong> <span class="mbf-wb-sub">{{type}} · {{stage}}</span></div>
+        <div class="mbf-wb-line">
+          <span class="mbf-wb-dc">{{localize "MBF.Crafting.Difficulty"}}
+            {{#if @root.isGM}}<input type="number" min="1" max="40" value="{{dc}}" data-mbf-dc="{{id}}">{{else}}<strong>{{dc}}</strong>{{/if}}
+          </span>
+          <span class="mbf-wb-boxes" data-tooltip="{{left}} / {{start}}">
+            {{#each boxes}}<i class="{{#if filled}}fa-solid fa-square-check{{else}}fa-regular fa-square{{/if}}"></i>{{/each}}
+          </span>
+        </div>
+        <div class="mbf-wb-parts">
+          {{#each parts}}<span class="mbf-wb-part"><img src="{{img}}" alt="">{{count}} {{name}}</span>{{/each}}
+        </div>
+      </div>
+      {{#if @root.canEdit}}
+      <div class="mbf-wb-buttons">
+        <button type="button" data-action="mbfRoll" data-id="{{id}}" {{#unless @root.rollReady}}disabled{{/unless}}><i class="fa-solid fa-dice-d12"></i> {{localize "MBF.Crafting.Roll"}}</button>
+        <button type="button" data-action="mbfCancel" data-id="{{id}}"><i class="fa-solid fa-rotate-left"></i> {{localize "MBF.Crafting.Cancel"}}</button>
+      </div>
+      {{/if}}
+    </section>
+    {{else}}
+    <p class="mbf-wb-empty">{{localize "MBF.Crafting.NoProjects"}}</p>
+    {{/each}}
+    {{#if blueprints.length}}
+    <p class="mbf-wb-blueprints"><i class="fa-solid fa-scroll"></i> {{localize "MBF.Crafting.KnownBlueprints"}}: {{#each blueprints}}<span class="mbf-wb-chip">{{this}}</span>{{/each}}</p>
+    {{/if}}
+    {{/if}}
+
+    {{#if isNew}}
+    <p class="hint">{{localize "MBF.Crafting.NewHint"}}</p>
+    {{#each groups}}
+    <h3 class="mbf-wb-group">{{label}}</h3>
+    {{#each recipes}}
+    <section class="mbf-wb-recipe {{#unless ok}}mbf-off{{/unless}}">
+      <img src="{{img}}" alt="">
+      <div class="mbf-wb-main">
+        <div class="mbf-wb-title">
+          <strong>{{name}}</strong> <span class="mbf-wb-sub">{{stage}}</span>
+          {{#if blueprint}}<span class="mbf-wb-chip {{#if hasBlueprint}}mbf-have{{/if}}"><i class="fa-solid fa-scroll"></i> {{localize "MBF.Crafting.Category.blueprint"}}</span>{{/if}}
+        </div>
+        <div class="mbf-wb-effect">{{{effect}}}</div>
+        <div class="mbf-wb-parts">
+          {{#each parts}}<span class="mbf-wb-part {{#if ok}}mbf-have{{else}}mbf-missing{{/if}}" data-tooltip="{{have}} / {{need}}"><img src="{{img}}" alt="">{{need}} {{name}}</span>{{/each}}
+        </div>
+      </div>
+      {{#if @root.canEdit}}
+      <div class="mbf-wb-buttons">
+        <button type="button" data-action="mbfStart" data-key="{{key}}" {{#unless ok}}disabled data-tooltip="{{problem}}"{{/unless}}><i class="fa-solid fa-hammer"></i> {{localize "MBF.Crafting.Start"}}</button>
+      </div>
+      {{/if}}
+    </section>
+    {{/each}}
+    {{/each}}
+    {{/if}}
+
+    {{#if isConsumables}}
+    <p class="hint">{{localize "MBF.Crafting.ConsumablesHint"}}</p>
+    {{#each consumables}}
+    <section class="mbf-wb-recipe {{#unless affordable}}mbf-off{{/unless}}">
+      <img src="{{img}}" alt="">
+      <div class="mbf-wb-main">
+        <div class="mbf-wb-title"><strong>{{name}}</strong></div>
+        <div class="mbf-wb-effect">{{{effect}}}</div>
+        <div class="mbf-wb-parts">
+          {{#each parts}}<span class="mbf-wb-part {{#if ok}}mbf-have{{else}}mbf-missing{{/if}}" data-tooltip="{{have}} / {{need}}"><img src="{{img}}" alt="">{{need}} {{name}}</span>{{/each}}
+        </div>
+      </div>
+      {{#if @root.canEdit}}
+      <div class="mbf-wb-buttons">
+        <label class="mbf-wb-max">{{localize "MBF.Crafting.UpTo"}} <input type="number" min="1" max="{{max}}" value="{{max}}" data-mbf-max="{{key}}"></label>
+        <button type="button" data-action="mbfBuild" data-key="{{key}}" {{#unless canBuild}}disabled{{/unless}}><i class="fa-solid fa-dice-d12"></i> {{localize "MBF.Crafting.Build"}}</button>
+      </div>
+      {{/if}}
+    </section>
+    {{/each}}
+    {{/if}}
+  </div>
+</div>

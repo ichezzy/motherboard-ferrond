@@ -40,8 +40,32 @@ const SAMPLE = {
     unmakeLabel: "No longer an Ikonis", makeLabel: "Make Ikonis", intro: "hint",
     augments: [{ key: "force", name: "Force", img: "f.webp", stage: "Uncommon", effect: "<p>+1 damage</p>" }],
     emptySlots: [0], canInstall: true, noAugmentsHint: false
-  }
+  },
+  // Workbench
+  isGM: true, canEdit: true, rollReady: true, isProjects: true, blueprints: ["Zapfer"],
+  projects: [{
+    id: "p1", name: "Magnetzug", img: "m.webp", type: "Augment", stage: "Uncommon", dc: 12, left: 1, start: 2,
+    boxes: [{ filled: true }, { filled: false }], parts: [{ name: "Coil", img: "c.webp", count: 6 }]
+  }],
+  consumables: [{
+    key: "flickblech", name: "Flickblech", img: "f.webp", effect: "<p>x</p>", affordable: 2, max: 2, canBuild: true,
+    parts: [{ key: "aluminum", name: "Aluminum", img: "a.webp", need: 3, have: 6, ok: true }]
+  }]
 };
+
+const RECIPE_ROW = {
+  key: "zapfer", name: "Zapfer", img: "z.webp", stage: "Rare", effect: "<p>x</p>", blueprint: true, hasBlueprint: false,
+  ok: false, problem: "needs blueprint", parts: [{ key: "crystal", name: "Crystal", img: "c.webp", need: 18, have: 2, ok: false }]
+};
+
+test("the workbench renders one root element in every view", () => {
+  const template = H.compile(fs.readFileSync(path.join(TEMPLATES, "workbench.hbs"), "utf8"));
+  for (const view of ["isProjects", "isNew", "isConsumables"]) {
+    const data = { ...SAMPLE, isProjects: false, [view]: true, groups: [{ label: "Augments", recipes: [RECIPE_ROW] }] };
+    assert.equal(rootCount(template(data)), 1, view);
+  }
+  assert.equal(rootCount(template({ ...SAMPLE, projects: [], blueprints: [] })), 1, "empty");
+});
 
 const VOID = new Set(["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"]);
 
