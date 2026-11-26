@@ -90,3 +90,21 @@ test("a new project starts at the stage's countdown and shows boxes", () => {
   assert.deepEqual([p.dc, p.start, p.progress], [12, 2, 2]);
   assert.deepEqual(countdownBoxes({ ...p, progress: 1 }).map(b => b.filled), [true, false]);
 });
+
+test("Quick Actions: who took Work on a Project in a long rest", async () => {
+  const { quickActionProjectActors, quickActionKeys } = await import("../scripts/crafting-rules.mjs");
+  assert.deepEqual(quickActionKeys([{ key: "prepare" }, "workOnProject", null]), ["prepare", "workOnProject"]);
+  const state = {
+    restType: "long",
+    actors: {
+      a1: { included: true, actions: [] },
+      a2: { included: true, actions: [{ key: "workOnProject" }] },
+      a3: { included: false, actions: [{ key: "workOnProject" }] },
+      a4: { included: true }
+    }
+  };
+  const flags = { a1: { actions: [{ id: "x", key: "workOnProject", target: null }] }, a4: { actions: ["clearStress"] } };
+  assert.deepEqual(quickActionProjectActors(state, id => flags[id]), ["a1", "a2"]);
+  assert.deepEqual(quickActionProjectActors({ ...state, restType: "short" }, id => flags[id]), []);
+  assert.deepEqual(quickActionProjectActors({}, () => null), []);
+});

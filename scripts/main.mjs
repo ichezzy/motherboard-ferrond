@@ -17,7 +17,7 @@ import { makeIkonis, unmakeIkonis, installAugment, removeAugment } from "./ikoni
 import { cleanUpDhIkonis } from "./ikonis-migrate.mjs";
 import { registerTechSetting, applyTech } from "./tech.mjs";
 import { registerCraftedCategories, addProduct } from "./crafted-items.mjs";
-import { registerDowntimeWatch, startProject, rollProject, buildConsumables, setRollReady } from "./crafting.mjs";
+import { registerDowntimeWatch, registerQuickActionsWatch, startProject, rollProject, buildConsumables, setRollReady } from "./crafting.mjs";
 import { openWorkbench, registerWorkbenchRefresh } from "./workbench.mjs";
 
 Hooks.once("init", () => {
@@ -54,6 +54,8 @@ Hooks.once("ready", async () => {
   registerShopManagerRefresh();
   registerShopWindowRefresh();
   registerWorkbenchRefresh();
+  // The long rest of "Daggerheart: Quick Actions" (its own downtime window).
+  registerQuickActionsWatch();
   // Players see the Ferrond group only while a shop is open.
   Hooks.on(SHOP_HOOK, () => refreshControls());
   await applyCurrency();

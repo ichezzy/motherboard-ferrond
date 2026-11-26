@@ -257,7 +257,8 @@
       "NeedsBlueprint": "This needs its blueprint in the inventory.",
       "MissingParts": "Not enough parts in the inventory.",
       "NoRoll": "No roll ready – take \"Work on a Project\" during a long rest (or ask the GM).",
-      "NotYours": "You do not own this character."
+      "NotYours": "You do not own this character.",
+      "RollsReadyChat": "Work on a Project: {actors} can roll at the workbench."
     }
   }
 }

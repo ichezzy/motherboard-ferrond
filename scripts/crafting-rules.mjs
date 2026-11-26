@@ -117,3 +117,26 @@ export function newProject(r, now = Date.now()) {
 export function countdownBoxes(project) {
   return Array.from({ length: project.start }, (_, n) => ({ filled: n < project.start - project.progress }));
 }
+
+/* -------------------------------------------- */
+/*  "Daggerheart: Quick Actions" long rests      */
+/* -------------------------------------------- */
+
+const QA_WORK_ON_A_PROJECT = "workOnProject";
+
+/** Move keys of a Quick Actions choice list (current shape: [{ key }], old shape: ["key"]). */
+export function quickActionKeys(list) {
+  return Array.isArray(list) ? list.map(a => (typeof a === "string" ? a : a?.key)).filter(Boolean) : [];
+}
+
+/**
+ * Characters that took "Work on a Project" in a finished Quick Actions long rest.
+ * state = the setting "downtimeUIState"; choicesOf(actorId) = the owner's "downtimeChoices" flag.
+ */
+export function quickActionProjectActors(state, choicesOf) {
+  if (state?.restType !== "long" || !state.actors) return [];
+  return Object.entries(state.actors)
+    .filter(([, gm]) => gm?.included)
+    .filter(([id, gm]) => [...quickActionKeys(gm.actions), ...quickActionKeys(choicesOf(id)?.actions)].includes(QA_WORK_ON_A_PROJECT))
+    .map(([id]) => id);
+}

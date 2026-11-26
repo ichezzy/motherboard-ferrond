@@ -127,7 +127,8 @@ Every character has a **workbench**: the **Crafting** bar at the top of the inve
   takes the parts out of the inventory; **Cancel** gives them back.
 - **Blueprints:** from Rare on you need the recipe's **blueprint item** in the inventory
   (compendium folder *Blueprints*). It is not used up.
-- **The roll:** taking **Work on a Project** in Daggerheart's rest window makes one roll ready
+- **The roll:** taking **Work on a Project** at a long rest makes one roll ready – in Daggerheart's rest
+  window or in the downtime window of *Daggerheart: Quick Actions* (when the GM applies the rest)
   (the GM can also allow one by hand). It is Daggerheart's own Finesse action roll against the
   project's Difficulty – Experiences, Hope and Fear as usual. The progress countdown moves like a
   Dynamic Countdown: Critical −3, Success with Hope −2, with Fear −1, Failure with Hope 0, with Fear +1

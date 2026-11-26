@@ -10,7 +10,8 @@ import { esc } from "./gm.mjs";
 import { STAGES } from "./recipes.mjs";
 import { addScrap } from "./scrap.mjs";
 import {
-  recipe, partsFor, piecesAffordable, startProblem, newProject, outcomeOf, nextProgress, consumableResult
+  recipe, partsFor, piecesAffordable, startProblem, newProject, outcomeOf, nextProgress, consumableResult,
+  quickActionProjectActors
 } from "./crafting-rules.mjs";
 import { blueprintKeys, scrapCounts, removeScrap, addProduct, partsText } from "./crafted-items.mjs";
 
@@ -197,4 +198,42 @@ export function registerDowntimeWatch() {
     }
     return result;
   };
+}
+
+/* -------------------------------------------- */
+/*  Long rest via "Daggerheart: Quick Actions"  */
+/* -------------------------------------------- */
+
+const QA = "daggerheart-quickactions";
+/**
+ * Quick Actions has its own downtime window. When the GM applies a rest it first sends the signal
+ * "downtimeUIClosed" and only then clears its state and the players' choices – so at that signal the
+ * choices can still be read. The active GM makes the rolls ready and says so in the chat.
+ */
+export function registerQuickActionsWatch() {
+  if (!game.modules.get(QA)?.active) return;
+  const onSetting = setting => {
+    if (setting?.key !== `${QA}.downtimeUIClosed` || !game.user.isActiveGM) return;
+    let state;
+    try {
+      state = game.settings.get(QA, "downtimeUIState");
+    } catch {
+      return;
+    }
+    const choicesOf = actorId => game.users.find(u => !u.isGM && u.character?.id === actorId)?.getFlag(QA, "downtimeChoices");
+    const actors = quickActionProjectActors(state, choicesOf)
+      .map(id => game.actors.get(id))
+      .filter(a => a?.type === "character");
+    if (!actors.length) return;
+    (async () => {
+      for (const actor of actors) await actor.update({ [`${PATH}.rollReady`]: true });
+      await ChatMessage.create({
+        content: `<div class="mbf-crafting-chat"><i class="fa-solid fa-screwdriver-wrench"></i> ${F("MBF.Crafting.RollsReadyChat", {
+          actors: esc(actors.map(a => a.name).join(", "))
+        })}</div>`
+      });
+    })().catch(err => console.warn(`${MODULE_ID} | Could not mark crafting rolls as ready`, err));
+  };
+  Hooks.on("updateSetting", onSetting);
+  Hooks.on("createSetting", onSetting);
 }
