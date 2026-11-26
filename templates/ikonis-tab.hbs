@@ -1,0 +1,40 @@
+<section class="tab {{tabs.ikonis.cssClass}} mbf-ikonis-tab" data-tab="ikonis" data-group="primary">
+  {{#if ikonis.isIkonis}}
+  <header class="mbf-ikonis-head">
+    <h3><i class="fa-solid fa-microchip"></i> {{ikonis.name}}</h3>
+    <span class="mbf-ikonis-slots{{#if ikonis.overfull}} mbf-warn{{/if}}">{{ikonis.used}} / {{ikonis.max}} {{localize "MBF.Ikonis.Slots"}}</span>
+  </header>
+  <p class="mbf-ikonis-bond">
+    {{#if ikonis.owner}}{{localize "MBF.Ikonis.BoundTo"}} <strong>{{ikonis.owner}}</strong> · {{/if}}{{localize "MBF.Ikonis.BondedHint"}}
+  </p>
+  <ul class="mbf-augment-list">
+    {{#each ikonis.augments}}
+    <li class="mbf-augment">
+      <img src="{{img}}" alt="">
+      <div class="mbf-augment-text">
+        <div class="mbf-augment-name"><strong>{{name}}</strong> <span class="mbf-augment-stage">{{stage}}</span></div>
+        <div class="mbf-augment-effect">{{{effect}}}</div>
+      </div>
+      {{#if ../ikonis.canEdit}}
+      <button type="button" class="mbf-augment-remove" data-action="mbfIkonisRemove" data-key="{{key}}" data-tooltip="MBF.Ikonis.Remove"><i class="fa-solid fa-eject"></i></button>
+      {{/if}}
+    </li>
+    {{/each}}
+    {{#each ikonis.emptySlots}}
+    <li class="mbf-augment mbf-augment-empty"><i class="fa-regular fa-square"></i> {{localize "MBF.Ikonis.EmptySlot"}}</li>
+    {{/each}}
+  </ul>
+  {{#if ikonis.noAugmentsHint}}<p class="hint">{{localize "MBF.Ikonis.NoAugmentsHint"}}</p>{{/if}}
+  {{#if ikonis.canEdit}}
+  <div class="mbf-ikonis-buttons">
+    <button type="button" data-action="mbfIkonisInstall"{{#unless ikonis.canInstall}} disabled{{/unless}}><i class="fa-solid fa-plug"></i> {{localize "MBF.Ikonis.Install"}}</button>
+    {{#if ikonis.isGM}}<button type="button" data-action="mbfIkonisUnmake"><i class="fa-solid fa-link-slash"></i> {{ikonis.unmakeLabel}}</button>{{/if}}
+  </div>
+  {{/if}}
+  {{else}}
+  <div class="mbf-ikonis-none">
+    <p>{{ikonis.intro}}</p>
+    {{#if ikonis.isGM}}<button type="button" data-action="mbfIkonisMake"><i class="fa-solid fa-link"></i> {{ikonis.makeLabel}}</button>{{/if}}
+  </div>
+  {{/if}}
+</section>

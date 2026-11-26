@@ -32,7 +32,15 @@ const SAMPLE = {
   shopName: "Rooks Stand", actor: { name: "Mara" }, multipleActors: true, actors: [{ uuid: "Actor.x", name: "Mara", selected: true }],
   wallet: [{ icon: "mbf-currency", label: "Bits", value: 4 }], isBuy: true, isSell: false,
   buyGroups: [{ label: "Shards", pieces: [{ key: "gear", name: "Gear", img: "g.webp", priceText: "1 Bit", stock: 0, qty: "" }] }],
-  sellRows: [{ id: "i1", name: "Coil", img: "c.webp", have: 2, priceText: "2 Bits", qty: 1 }]
+  sellRows: [{ id: "i1", name: "Coil", img: "c.webp", have: 2, priceText: "2 Bits", qty: 1 }],
+  // Ikonis tab
+  tabs: { ikonis: { cssClass: "active" } },
+  ikonis: {
+    isIkonis: true, isGM: true, name: "Ikonis", canEdit: true, owner: "Mara", used: 1, max: 2,
+    unmakeLabel: "No longer an Ikonis", makeLabel: "Make Ikonis", intro: "hint",
+    augments: [{ key: "force", name: "Force", img: "f.webp", stage: "Uncommon", effect: "<p>+1 damage</p>" }],
+    emptySlots: [0], canInstall: true, noAugmentsHint: false
+  }
 };
 
 const VOID = new Set(["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"]);

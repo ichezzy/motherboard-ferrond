@@ -4,6 +4,10 @@
       "Currency": {
         "Name": "Bits, Bytes and Chunks",
         "Hint": "Use Ferrond's money on the character sheets: Bits, Bytes and Chunks (8 Bits = 1 Byte, 8 Bytes = 1 Chunk). Switches off the Quantum currency of dh-ikonis. Turn this off to keep another currency."
+      },
+      "Tech": {
+        "Name": "Tech instead of Magic damage",
+        "Hint": "Ferrond knows only physical and tech damage. Renames Daggerheart's magic damage to Tech (name and icon in the Homebrew settings; the rules stay the same). A name you set there yourself is kept."
       }
     },
     "Currency": {
@@ -139,6 +143,57 @@
       "NotYours": "You can only trade for your own character.",
       "BoughtChat": "{actor} bought {items} for {price} at {shop}.",
       "SoldChat": "{actor} sold {items} for {price} at {shop}."
+    },
+    "Augment": {
+      "Category": "Augment",
+      "SheetGroup": "Augments",
+      "Key": "Augment",
+      "Tag": "Augment"
+    },
+    "Ikonis": {
+      "Name": "Ikonis",
+      "Slots": "slots",
+      "BoundTo": "Bound to",
+      "BondedHint": "Bonded: + your level to damage with this weapon.",
+      "EmptySlot": "Empty slot",
+      "Install": "Install augment",
+      "InstallTitle": "Install augment",
+      "InstallHint": "Augments from this character's inventory. Swap them during downtime.",
+      "Remove": "Remove augment",
+      "RemoveTitle": "Remove augment",
+      "RemoveHint": "Take {augment} out of {weapon}? It goes back into the inventory.",
+      "NoAugmentsHint": "No augment in the inventory that is not installed yet.",
+      "NotIkonisHint": "This weapon is not an {ikonis}. An {ikonis} is bound to its person, has Bonded and grows through augments.",
+      "Make": "Make {ikonis}",
+      "MakeTitle": "Make {ikonis}",
+      "MakeHint": "{weapon} becomes an {ikonis}, bound to the character that carries it, and gets Bonded.",
+      "PresetLabel": "Stats",
+      "PresetKeep": "Keep the weapon's stats",
+      "Preset": {
+        "melee": "Physical · Melee · d12+1",
+        "veryClose": "Physical · Very Close · d10+2",
+        "close": "Physical · Close · d10",
+        "far": "Tech · Far · d8+1",
+        "veryFar": "Tech · Very Far · d6+1"
+      },
+      "TraitLabel": "Trait",
+      "PresetHint": "Iconic Weapon stats of the Motherboard frame. The trait is only used with a preset.",
+      "Unmake": "No longer an {ikonis}",
+      "UnmakeTitle": "No longer an {ikonis}",
+      "UnmakeHint": "{weapon} stops being an {ikonis}. Its augments go back into the inventory.",
+      "MadeChat": "{weapon} is now an {ikonis}, bound to {actor}.",
+      "MadeChatNoOwner": "{weapon} is now an {ikonis}.",
+      "UnmadeChat": "{weapon} is no longer an {ikonis}.",
+      "InstalledChat": "{actor} installs <strong>{augment}</strong> into {weapon}.",
+      "RemovedChat": "{actor} takes <strong>{augment}</strong> out of {weapon}.",
+      "NotIkonis": "This weapon is not an {ikonis}.",
+      "NotSameOwner": "The augment must be in the inventory of the character who carries the weapon.",
+      "NotYours": "You do not own this weapon.",
+      "NoAugment": "That is not an augment.",
+      "AlreadyInstalled": "This augment is already installed – the same augment does not work twice.",
+      "NoSlot": "No free slot.",
+      "DisableDhIkonis": "Motherboard: Ferrond now brings its own {ikonis}. Please disable the module dh-ikonis and reload; Ferrond then removes its leftovers.",
+      "CleanedUp": "dh-ikonis leftovers removed ({weapons} weapons, {features} homebrew features)."
     }
   }
 }

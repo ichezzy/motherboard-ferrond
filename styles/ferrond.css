@@ -170,3 +170,128 @@ button.icon.mbf-currency {
 
 /* "Browse" button on the shop card in the chat */
 .chat-message button.mbf-shop-open { margin-top: 0.3rem; }
+
+/* ---------- Ikonis tab on the weapon sheet ---------- */
+
+.mbf-ikonis-tab {
+  padding: 0.5rem 0.75rem;
+}
+.mbf-ikonis-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.mbf-ikonis-head h3 {
+  margin: 0;
+  border: none;
+}
+.mbf-ikonis-slots {
+  font-weight: bold;
+  white-space: nowrap;
+}
+.mbf-ikonis-slots.mbf-warn {
+  color: var(--color-level-error, #c0392b);
+}
+.mbf-ikonis-bond {
+  margin: 0.25rem 0 0.75rem;
+  font-size: var(--font-size-12, 0.85rem);
+  opacity: 0.85;
+}
+.mbf-augment-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.mbf-augment {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  border-radius: 6px;
+}
+.mbf-augment img {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border: none;
+  object-fit: contain;
+}
+.mbf-augment-text {
+  flex: 1;
+  min-width: 0;
+}
+.mbf-augment-stage {
+  font-size: var(--font-size-11, 0.75rem);
+  opacity: 0.75;
+  margin-left: 0.25rem;
+}
+.mbf-augment-effect p {
+  margin: 0.1rem 0 0;
+  font-size: var(--font-size-12, 0.85rem);
+}
+.mbf-augment-remove {
+  flex: none;
+  width: auto;
+  padding: 0 0.5rem;
+}
+.mbf-augment-empty {
+  border-style: dashed;
+  opacity: 0.6;
+  font-style: italic;
+}
+.mbf-ikonis-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.mbf-ikonis-buttons button {
+  flex: 1;
+}
+.mbf-ikonis-none {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+/* Install dialog */
+.mbf-augment-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-height: 420px;
+  overflow-y: auto;
+}
+.mbf-augment-choice {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.4rem;
+  border: 1px solid rgba(127, 127, 127, 0.35);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.mbf-augment-choice:has(input:checked) {
+  border-color: var(--color-border-highlight, #ff6400);
+}
+.mbf-augment-choice img {
+  width: 36px;
+  height: 36px;
+  border: none;
+  object-fit: contain;
+}
+.mbf-augment-choice em {
+  opacity: 0.75;
+  margin-left: 0.25rem;
+}
+.mbf-augment-choice p {
+  margin: 0.1rem 0 0;
+}
+.mbf-ikonis-chat i {
+  margin-right: 0.25rem;
+}

@@ -1,6 +1,7 @@
 /**
  * Builds the compendiums from scripts/data.mjs with the official Foundry CLI:
- *   packs/items   "Ferrond Items"  – the 18 scrap pieces in folders Scrap/Shards|Metals|Components
+ *   packs/items   "Ferrond Items"  – the 18 scrap pieces in folders Scrap/Shards|Metals|Components,
+ *                                    the augments (from the vault's recipe table) in folder Augments
  *   packs/tables  "Ferrond Tables" – Shards (d6), Metals (d8), Components (d10), linked to the items
  *
  *   node tools/build-packs.mjs            -> into the repo (packs/ is not in git)
@@ -15,6 +16,8 @@ import {
   MODULE_ID, ITEM_PACK, TABLE_PACK, SCRAP_CATEGORY, SCRAP_ITEMS, KINDS, KIND_ORDER,
   itemId, tableId, scrapIcon, rollRanges
 } from "../scripts/data.mjs";
+import { STAGES } from "../scripts/recipes.mjs";
+import { AUGMENTS, AUGMENT_CATEGORY, augmentIcon, augmentItemId } from "../scripts/ikonis-rules.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const STATS = Object.freeze({ coreVersion: "14.365", systemId: "daggerheart", systemVersion: "2.12.9" });
@@ -22,6 +25,7 @@ const ATTRIBUTION = { source: "Motherboard: Ferrond", page: null, artist: "" };
 
 const pad = s => `${s}0000000000000000`.slice(0, 16);
 const FOLDER_SCRAP = pad("mbfFolderScrap");
+const FOLDER_AUGMENTS = pad("mbfFolderAugment");
 const kindFolder = kind => pad(`mbfFolder${kind}`);
 const resultId = (kind, n) => pad(`mbfRes${kind}`).slice(0, 14) + String(n).padStart(2, "0");
 
@@ -56,6 +60,35 @@ export function itemDocuments() {
       sort: item.value * 1000,
       ownership: { default: 0 },
       flags: { [MODULE_ID]: { key: item.key } },
+      _stats: { ...STATS },
+      _key: `!items!${id}`
+    });
+  }
+  docs.push(folder(FOLDER_AUGMENTS, "Augments", null, 200000));
+  const stageOrder = Object.keys(STAGES);
+  for (const recipe of AUGMENTS) {
+    const id = augmentItemId(recipe.key);
+    const SCRAP_NAME = Object.fromEntries(SCRAP_ITEMS.map(i => [i.key, i.name]));
+    const parts = recipe.parts.map(p => `${p.count} ${SCRAP_NAME[p.key]}`).join(" · ");
+    docs.push({
+      _id: id,
+      name: recipe.name,
+      type: "loot",
+      img: augmentIcon(recipe.key),
+      system: {
+        description: `${recipe.effect}<p><em>${STAGES[recipe.stage].label} augment · Parts: ${parts}</em></p>`,
+        quantity: 1,
+        category: AUGMENT_CATEGORY,
+        categoryData: { key: recipe.key },
+        attribution: { ...ATTRIBUTION },
+        gmNotes: "",
+        actions: {}
+      },
+      effects: [],
+      folder: FOLDER_AUGMENTS,
+      sort: (stageOrder.indexOf(recipe.stage) + 1) * 100000 + AUGMENTS.indexOf(recipe) * 100,
+      ownership: { default: 0 },
+      flags: { [MODULE_ID]: { augment: recipe.key } },
       _stats: { ...STATS },
       _key: `!items!${id}`
     });
@@ -125,5 +158,5 @@ export async function buildPacks(target = ROOT) {
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   await buildPacks();
-  console.log(`Built packs/${ITEM_PACK} (${SCRAP_ITEMS.length} items) and packs/${TABLE_PACK} (${KIND_ORDER.length} tables).`);
+  console.log(`Built packs/${ITEM_PACK} (${SCRAP_ITEMS.length} scrap pieces, ${AUGMENTS.length} augments) and packs/${TABLE_PACK} (${KIND_ORDER.length} tables).`);
 }
