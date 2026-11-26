@@ -205,25 +205,37 @@ export function registerDowntimeWatch() {
 /* -------------------------------------------- */
 
 const QA = "daggerheart-quickactions";
+
 /**
- * Quick Actions has its own downtime window. When the GM applies a rest it first sends the signal
- * "downtimeUIClosed" and only then clears its state and the players' choices – so at that signal the
- * choices can still be read. The active GM makes the rolls ready and says so in the chat.
+ * Quick Actions has its own downtime window. When the GM applies a rest, Quick Actions posts its rest
+ * card in the chat, then sends the signal "downtimeUIClosed", and only after that clears its state and
+ * the players' choices. Ferrond listens to both (on the client of the GM who applies the rest) and
+ * counts each rest once, so the choices are always read while they still exist.
  */
 export function registerQuickActionsWatch() {
   if (!game.modules.get(QA)?.active) return;
-  const onSetting = setting => {
-    if (setting?.key !== `${QA}.downtimeUIClosed` || !game.user.isActiveGM) return;
+  const log = (...args) => console.log(`${MODULE_ID} | Quick Actions:`, ...args);
+  let lastRest = null;
+
+  const grant = source => {
     let state;
     try {
       state = game.settings.get(QA, "downtimeUIState");
-    } catch {
+    } catch (err) {
+      log(`${source}: cannot read downtimeUIState`, err);
       return;
     }
+    if (!state?.actors) return log(`${source}: no downtime state (already cleared?)`);
+    if (state.restType !== "long") return log(`${source}: ${state.restType ?? "unknown"} rest – crafting only at a long rest`);
+    const stamp = state.timestamp ?? JSON.stringify(state.actors);
+    if (lastRest === stamp) return;
+    lastRest = stamp;
+
     const choicesOf = actorId => game.users.find(u => !u.isGM && u.character?.id === actorId)?.getFlag(QA, "downtimeChoices");
     const actors = quickActionProjectActors(state, choicesOf)
       .map(id => game.actors.get(id))
       .filter(a => a?.type === "character");
+    log(`${source}: long rest, Work on a Project:`, actors.map(a => a.name), { state, choices: Object.keys(state.actors).map(id => [id, choicesOf(id)]) });
     if (!actors.length) return;
     (async () => {
       for (const actor of actors) await actor.update({ [`${PATH}.rollReady`]: true });
@@ -234,6 +246,22 @@ export function registerQuickActionsWatch() {
       });
     })().catch(err => console.warn(`${MODULE_ID} | Could not mark crafting rolls as ready`, err));
   };
+
+  // 1. The rest card Quick Actions posts (before it clears anything).
+  Hooks.on("createChatMessage", (message, options, userId) => {
+    if (userId !== game.user.id || !game.user.isGM) return;
+    const content = message.content ?? "";
+    const longTitle = game.i18n.localize("DAGGERHEART.APPLICATIONS.Downtime.longRest.title");
+    const fearLine = game.i18n.localize("DH_QUICKACTIONS.REST.gmEarnsFear");
+    if (content.includes(longTitle) && content.includes(fearLine)) grant("rest card");
+  });
+
+  // 2. The close signal (still before the state is cleared). userId is the last hook argument.
+  const onSetting = (setting, ...rest) => {
+    if (setting?.key !== `${QA}.downtimeUIClosed` || rest.at(-1) !== game.user.id) return;
+    grant("close signal");
+  };
   Hooks.on("updateSetting", onSetting);
   Hooks.on("createSetting", onSetting);
+  log("watching its downtime window for Work on a Project.");
 }
