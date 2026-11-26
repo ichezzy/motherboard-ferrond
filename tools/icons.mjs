@@ -20,7 +20,7 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SOURCE = path.join(ROOT, "art", "originals");
 
 /** File names in art/originals that differ from the item key. */
-const ALIASES = { aluminium: "aluminum" };
+const ALIASES = { aluminium: "aluminum", bond: "scope", magnetic_force: "magnetzug", drain: "zapfer" };
 const CURRENCY = ["bits", "bytes", "chunks"];
 const TOOLS = ["screw", "wrench"];
 // Same names as in docs/icon-prompts.md.

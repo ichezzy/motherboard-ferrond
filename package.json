@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node --test",
     "icons": "node tools/icons.mjs",
-    "packs": "node tools/build-packs.mjs"
+    "packs": "node tools/build-packs.mjs",
+    "recipes": "node tools/recipes.mjs"
   },
   "devDependencies": {
     "@foundryvtt/foundryvtt-cli": "3.0.5",

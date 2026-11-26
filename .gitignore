@@ -5,3 +5,4 @@ dist/
 # Chezzy's full-size AI images; the module ships the trimmed copies in assets/icons.
 art/originals/
 tools/target.txt
+tools/vault.txt
