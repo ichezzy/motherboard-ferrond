@@ -371,8 +371,17 @@ Same style as the scrap. Each one shows the materials of its recipe.
 
 *Verbrauchsgut · flare*
 
+Described as a signal light, because some image generators refuse cartridges and fuses.
+If it is still refused, use the fallback below the prompt (a signal lantern).
+
 ```
-Game item icon, clean comic illustration style inspired by Borderlands and Gachiakuta: confident, smooth black ink outlines with varying line weight, flat cel-shaded colors with two to three tones, a few crisp hatching accents in the shadows. Industrial scrappunk look: worn metal, scratched paint, rivets, small dents, a hint of grime – but tidy and readable, no sketchy or messy lines. Single object, three-quarter view, slightly tilted, centered, filling about 80% of a square 512×512 canvas. Transparent background, no ground shadow, no text, no letters, no numbers, no logos. Subject: a homemade flare cartridge – a short aluminum tube with a trigger cap and a glass fuse at its base, a red glow leaking from its open end.
+Game item icon, clean comic illustration style inspired by Borderlands and Gachiakuta: confident, smooth black ink outlines with varying line weight, flat cel-shaded colors with two to three tones, a few crisp hatching accents in the shadows. Industrial scrappunk look: worn metal, scratched paint, rivets, small dents, a hint of grime – but tidy and readable, no sketchy or messy lines. Single object, three-quarter view, slightly tilted, centered, filling about 80% of a square 512×512 canvas. Transparent background, no ground shadow, no text, no letters, no numbers, no logos. Subject: a sci-fi emergency signal light for a video game – a short, chunky aluminum tube like a heavy-duty glow stick, a red rubber cap with a pull tab on one end, a small glass bulb set into the other, bright red light glowing out of its open end and a few small red sparkles drifting up.
+```
+
+Fallback:
+
+```
+Game item icon, clean comic illustration style inspired by Borderlands and Gachiakuta: confident, smooth black ink outlines with varying line weight, flat cel-shaded colors with two to three tones, a few crisp hatching accents in the shadows. Industrial scrappunk look: worn metal, scratched paint, rivets, small dents, a hint of grime – but tidy and readable, no sketchy or messy lines. Single object, three-quarter view, slightly tilted, centered, filling about 80% of a square 512×512 canvas. Transparent background, no ground shadow, no text, no letters, no numbers, no logos. Subject: a small handheld signal lantern for a video game – a slim aluminum cylinder with a carrying loop on top and a red glass dome on the other end, glowing bright red, soft red light rays around the dome.
 ```
 
 ### Störknall → `art/originals/stoerknall.webp`
