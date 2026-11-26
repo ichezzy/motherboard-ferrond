@@ -481,10 +481,20 @@ Game item icon, clean comic illustration style inspired by Borderlands and Gachi
 
 ### Rohrladung → `art/originals/rohrladung.webp`
 
-*Verbrauchsgut · thrown explosive*
+*Verbrauchsgut · thrown blast*
+
+Some image generators refuse anything that looks like a real bomb, so this prompt shows a
+sci-fi canister instead of a pipe with a fuse. If it is still refused, use the fallback below
+the prompt: the same object, described as a heat cell.
 
 ```
-Game item icon, clean comic illustration style inspired by Borderlands and Gachiakuta: confident, smooth black ink outlines with varying line weight, flat cel-shaded colors with two to three tones, a few crisp hatching accents in the shadows. Industrial scrappunk look: worn metal, scratched paint, rivets, small dents, a hint of grime – but tidy and readable, no sketchy or messy lines. Single object, three-quarter view, slightly tilted, centered, filling about 80% of a square 512×512 canvas. Transparent background, no ground shadow, no text, no letters, no numbers, no logos. Subject: a homemade pipe bomb – a short cobalt pipe with copper end caps, a trigger igniter and a fuse cord, hand-painted warning stripes without letters.
+Game item icon, clean comic illustration style inspired by Borderlands and Gachiakuta: confident, smooth black ink outlines with varying line weight, flat cel-shaded colors with two to three tones, a few crisp hatching accents in the shadows. Industrial scrappunk look: worn metal, scratched paint, rivets, small dents, a hint of grime – but tidy and readable, no sketchy or messy lines. Single object, three-quarter view, slightly tilted, centered, filling about 80% of a square 512×512 canvas. Transparent background, no ground shadow, no text, no letters, no numbers, no logos. Subject: a sci-fi throwable charge for a video game – a short, chunky cobalt canister with heavy copper end caps and a ring-pull on top, glowing orange-hot seams around its middle and a thin wisp of steam escaping from a vent, hand-painted hazard stripes without letters.
+```
+
+Fallback:
+
+```
+Game item icon, clean comic illustration style inspired by Borderlands and Gachiakuta: confident, smooth black ink outlines with varying line weight, flat cel-shaded colors with two to three tones, a few crisp hatching accents in the shadows. Industrial scrappunk look: worn metal, scratched paint, rivets, small dents, a hint of grime – but tidy and readable, no sketchy or messy lines. Single object, three-quarter view, slightly tilted, centered, filling about 80% of a square 512×512 canvas. Transparent background, no ground shadow, no text, no letters, no numbers, no logos. Subject: an overheating sci-fi power cell for a video game – a short, chunky cobalt cylinder with heavy copper caps and a small ring handle on top, its middle glowing orange-hot through cracks in the casing, a thin wisp of steam rising from a vent, hand-painted yellow and black stripes without letters.
 ```
 
 ### Ladepatrone → `art/originals/ladepatrone.webp`
