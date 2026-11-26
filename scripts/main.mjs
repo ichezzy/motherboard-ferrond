@@ -17,7 +17,7 @@ import { makeIkonis, unmakeIkonis, installAugment, removeAugment } from "./ikoni
 import { cleanUpDhIkonis } from "./ikonis-migrate.mjs";
 import { registerTechSetting, applyTech } from "./tech.mjs";
 import { registerCraftedCategories, addProduct } from "./crafted-items.mjs";
-import { watchDowntime, startProject, rollProject, buildConsumables, setRollReady } from "./crafting.mjs";
+import { registerDowntimeWatch, startProject, rollProject, buildConsumables, setRollReady } from "./crafting.mjs";
 import { openWorkbench, registerWorkbenchRefresh } from "./workbench.mjs";
 
 Hooks.once("init", () => {
@@ -45,6 +45,8 @@ Hooks.once("init", () => {
 
 // The Ikonis tab on Daggerheart's weapon sheet (needs the system's API and the translations).
 Hooks.once("setup", registerIkonisTab);
+// "Work on a Project" in Daggerheart's rest window makes one crafting roll ready.
+Hooks.once("setup", registerDowntimeWatch);
 
 Hooks.once("ready", async () => {
   // "Sell" in the item menu (⋮ / right click) of scrap – on every character sheet class (Daggerheart, Sleek UI, …).
@@ -68,9 +70,6 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
   renderReleaseCard(message, html);
   renderShopCard(message, html, openShopWindow);
 });
-
-// "Work on a Project" in Daggerheart's long rest dialog makes one crafting roll ready.
-Hooks.on("preCreateChatMessage", watchDowntime);
 
 // Sheets that draw their own inventory (Daggerheart Sleek UI): scrap and augments into own sections.
 Hooks.on("renderCharacterSheet", sortScrapIntoLoot);

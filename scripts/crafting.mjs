@@ -2,8 +2,8 @@
  * Crafting yourself: projects with a progress countdown, and consumables in one roll.
  *
  * State on the actor: flags.motherboard-ferrond.crafting = { rollReady, projects: { <id>: project } }.
- * A roll becomes ready when the character takes "Work on a Project" in Daggerheart's long rest
- * dialog (or when the GM allows one). Everything runs on the owner's client; the chat shows it all.
+ * A roll becomes ready when the character takes "Work on a Project" in Daggerheart's rest
+ * window (or when the GM allows one). Everything runs on the owner's client; the chat shows it all.
  */
 import { MODULE_ID } from "./data.mjs";
 import { esc } from "./gm.mjs";
@@ -17,7 +17,6 @@ import { blueprintKeys, scrapCounts, removeScrap, addProduct, partsText } from "
 const FLAG = "crafting";
 const PATH = `flags.${MODULE_ID}.${FLAG}`;
 export const CRAFTING_HOOK = `${MODULE_ID}.craftingChanged`;
-const WORK_ON_A_PROJECT = "longRest.moves.workOnAProject";
 
 const L = key => game.i18n.localize(key);
 const F = (key, data) => game.i18n.format(key, data);
@@ -168,17 +167,34 @@ export async function buildConsumables(actor, key, max) {
 /*  Long rest: "Work on a Project"              */
 /* -------------------------------------------- */
 
+const WORK_ON_A_PROJECT = "workOnAProject";
+
 /**
- * Hook "preCreateChatMessage": Daggerheart's downtime card lists the chosen moves
- * (system.moves[].movePath). "Work on a Project" during a long rest makes one crafting roll ready.
+ * Daggerheart's rest window (applications.dialogs.Downtime) resets its move selection inside its
+ * "takeDowntime" action, and the chat card it posts loses the move list. So the action itself is
+ * wrapped: when the chosen moves include "Work on a Project", one crafting roll becomes ready.
+ * Runs at setup, before any rest window is opened.
  */
-export function watchDowntime(message, data, options, userId) {
-  if (userId !== game.user.id) return;
-  const moves = data?.system?.moves;
-  if (!Array.isArray(moves) || !moves.some(m => m?.movePath === WORK_ON_A_PROJECT)) return;
-  const actor = fromUuidSync(data.system.actor);
-  if (actor?.documentName !== "Actor" || !actor.isOwner) return;
-  actor.update({ [`${PATH}.rollReady`]: true }).then(() => {
-    ui.notifications.info(F("MBF.Crafting.RollReadyNote", { actor: actor.name }));
-  });
+export function registerDowntimeWatch() {
+  const Downtime = game.system?.api?.applications?.dialogs?.Downtime;
+  const actions = Downtime?.DEFAULT_OPTIONS?.actions;
+  if (typeof actions?.takeDowntime !== "function") {
+    console.warn(`${MODULE_ID} | Daggerheart's rest window was not found – the GM allows crafting rolls by hand.`);
+    return;
+  }
+  const original = actions.takeDowntime;
+  actions.takeDowntime = async function (...args) {
+    const chosen = Number(this.moveData?.longRest?.moves?.[WORK_ON_A_PROJECT]?.selected) > 0;
+    const actor = this.actor;
+    const result = await original.apply(this, args);
+    if (chosen && actor?.isOwner && actor.type === "character") {
+      try {
+        await actor.update({ [`${PATH}.rollReady`]: true });
+        ui.notifications.info(F("MBF.Crafting.RollReadyNote", { actor: actor.name }));
+      } catch (err) {
+        console.warn(`${MODULE_ID} | Could not mark the crafting roll as ready`, err);
+      }
+    }
+    return result;
+  };
 }
